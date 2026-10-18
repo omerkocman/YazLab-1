@@ -5,6 +5,7 @@ public class InteractionUI : MonoBehaviour
 {
     public static InteractionUI Instance;
 
+    [SerializeField] private Canvas _canvas;
     [SerializeField] private TextMeshProUGUI promptText;
 
     private void Awake()
@@ -15,11 +16,11 @@ public class InteractionUI : MonoBehaviour
     public void Show(string key, string action)
     {
         promptText.text = $"<b><color=orange>[{key}]</color></b> <color=white>{action}</color>";
-        promptText.gameObject.SetActive(true);
+        _canvas.enabled = true;
     }
 
     public void Hide()
     {
-        promptText.gameObject.SetActive(false);
+        _canvas.enabled = false;
     }
 }

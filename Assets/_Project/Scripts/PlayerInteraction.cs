@@ -58,6 +58,7 @@ public class PlayerInteraction : MonoBehaviour
 
             else
             {
+                InteractionUI.Instance.Hide();
                 ResetCurrentInteractable();
             }
         }
