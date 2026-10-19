@@ -241,7 +241,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8660095685457370586}
-  - component: {fileID: 2803857509545492585}
   - component: {fileID: 4903934759125343248}
   - component: {fileID: 2040127681364768852}
   m_Layer: 6
@@ -267,20 +266,6 @@ Transform:
   - {fileID: 8906372904623279910}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2803857509545492585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8315060568077895520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30158cdad8db5cf4a922c209f26090dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractableOutline
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 10
 --- !u!65 &4903934759125343248
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -318,6 +303,5 @@ MonoBehaviour:
   isOpen: 1
   isLocked: 0
   duration: 0.5
-  revert: 0
   openAngle: -90
   top: {fileID: 24151098962782004}

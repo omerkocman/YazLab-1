@@ -16,7 +16,6 @@ public abstract class Openable : Interactable
     {
         base.Awake();
 
-        UpdatePropmtMessage();
     }
 
     public override void Interact()
@@ -27,8 +26,6 @@ public abstract class Openable : Interactable
         }
 
         isOpen = !isOpen;
-
-        UpdatePropmtMessage();
 
         if(isOpen)
         {
@@ -41,22 +38,6 @@ public abstract class Openable : Interactable
         }
      }
 
-    private void UpdatePropmtMessage()
-    {
-        if (isLocked)
-        {
-            SetPropmtMessage(lockedPropmt);
-        }
-
-        else if (isOpen)
-        {
-            SetPropmtMessage(openPropmt);
-        }
-        else
-        {
-            SetPropmtMessage(closePropmt);
-        }
-    }
     protected abstract void OnOpen();
     protected abstract void OnClose();
 

@@ -1,23 +1,22 @@
 using System;
 using UnityEngine;
 
-public class InteractableOutline : MonoBehaviour
+public class InteractableOutline
 {
-    [Header("Outline Settings")]
-    [SerializeField] private Color outlineColor = Color.white;
-    [SerializeField, Range(0, 10)] private float outlineWidth = 10f;
+    // Outline Settings
+    private Color outlineColor = Color.white;
+    private float outlineWidth = 10f;
     private Outline _outline;
 
-    private void Awake()
+
+    public InteractableOutline(GameObject gameObject)
     {
-        _outline = GetComponentInChildren<Outline>();
-        
+        _outline = gameObject.GetComponentInChildren<Outline>();
         if(_outline != null)
         {
             SetDefaultSettings();
         }
     }
-
     public void Enable()
     {
         if(_outline != null)

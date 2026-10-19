@@ -5,18 +5,18 @@ public abstract class Interactable : MonoBehaviour
 {
     
     [Header("Interaction Settings")]
-    [SerializeField] protected string promptMessage = "Interact";
+    protected virtual string promptMessage => "Interact";
 
     private InteractableOutline _outline;
 
     protected virtual void Awake()
     {
-        _outline = GetComponent<InteractableOutline>();
+        _outline = new InteractableOutline(gameObject);
     }
 
     public abstract void Interact();
 
-    public virtual void OnFocus()
+    public virtual void Highlight()
     {
         if(_outline != null)
         {
@@ -24,7 +24,7 @@ public abstract class Interactable : MonoBehaviour
         }
     }
 
-    public virtual void OnLoseFocus()
+    public virtual void Unhighlight()
     {
         if(_outline != null)
         {
@@ -35,10 +35,5 @@ public abstract class Interactable : MonoBehaviour
     public string GetPropmt()
     {
         return promptMessage;
-    }
-
-    protected void SetPropmtMessage(string newPropmtMessage)
-    {
-        promptMessage = newPropmtMessage;
     }
 }

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8925173153007632939}
-  - component: {fileID: 1721458218755688446}
   - component: {fileID: 8810517552683290118}
   m_Layer: 6
   m_Name: PF_Money
@@ -34,20 +33,6 @@ Transform:
   - {fileID: 4477688185405134566}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1721458218755688446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8691515371787134042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30158cdad8db5cf4a922c209f26090dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InteractableOutline
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 10
 --- !u!114 &8810517552683290118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df61f736df1c3b45924bf75ce02a6af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pickable
-  promptMessage: Interact
+  itemData: {fileID: 0}
+  amount: 1
 --- !u!1001 &4154932203185516813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,6 +110,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 06175cfee688f5344a660f847b47fb85, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7304579210787129271}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 06175cfee688f5344a660f847b47fb85, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3496054730990631578}
   m_SourcePrefab: {fileID: 100100000, guid: 06175cfee688f5344a660f847b47fb85, type: 3}
 --- !u!1 &3848362177563528284 stripped
 GameObject:
@@ -148,6 +137,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!65 &3496054730990631578
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3848362177563528284}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.26250544, y: 0.096909285, z: 0.14306825}
+  m_Center: {x: 0, y: 0.043243885, z: -0.0000000037252903}
 --- !u!4 &4477688185405134566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 06175cfee688f5344a660f847b47fb85, type: 3}

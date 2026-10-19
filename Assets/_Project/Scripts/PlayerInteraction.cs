@@ -52,7 +52,7 @@ public class PlayerInteraction : MonoBehaviour
                     SetCurrentInteractable(interactable);
                 }
                 // if
-                InteractionUI.Instance.Show(_input.GetInteractionBindingName(), currentInteractable.GetPropmt());
+                InteractionUI.Instance.Show(_input.GetInteractionBindingName(), currentInteractable.GetPropmt(), interactable.transform);
                 
             }
 
@@ -73,14 +73,14 @@ public class PlayerInteraction : MonoBehaviour
     private void SetCurrentInteractable(Interactable interactable)
     {
         currentInteractable = interactable;
-        currentInteractable.OnFocus();
+        currentInteractable.Highlight();
     }
 
     private void ResetCurrentInteractable()
     {
         if(currentInteractable != null)
         {
-            currentInteractable.OnLoseFocus();
+            currentInteractable.Unhighlight();
             currentInteractable = null;
         }
     }
