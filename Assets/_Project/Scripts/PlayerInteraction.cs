@@ -1,4 +1,3 @@
-using StarterAssets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -52,20 +51,20 @@ public class PlayerInteraction : MonoBehaviour
                     SetCurrentInteractable(interactable);
                 }
                 // if
-                InteractionUI.Instance.Show(_input.GetInteractionBindingName(), currentInteractable.GetPropmt(), interactable.transform);
+                //InteractionUI.Instance.Show(_input.GetInteractionBindingName(), currentInteractable.GetPropmt(), interactable);
                 
             }
 
             else
             {
-                InteractionUI.Instance.Hide();
+                //InteractionUI.Instance.Hide();
                 ResetCurrentInteractable();
             }
         }
 
         else
         {
-            InteractionUI.Instance.Hide();
+            //InteractionUI.Instance.Hide();
             ResetCurrentInteractable();
         }
     }

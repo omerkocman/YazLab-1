@@ -1,0 +1,168 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/InventoryUI.uss?fileID=7433441132597879392&amp;guid=237eb91c0d6675946ab6511f26aa5b83&amp;type=3#InventoryUI"/>
+    <Style src="project://database/Assets/_Project/UI/Global.uss?fileID=7433441132597879392&amp;guid=e6d183d127ace9c4089b8188ad5e39b6&amp;type=3#Global"/>
+    <ui:VisualElement name="root" style="flex-grow: 1;">
+        <ui:VisualElement name="inventory-container">
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+            <ui:VisualElement name="inventory-slot">
+                <ui:Image name="slot-icon">
+                    <ui:Label text="x0" name="slot-text"/>
+                </ui:Image>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

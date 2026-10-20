@@ -6,9 +6,9 @@ public abstract class Openable : Interactable
     [SerializeField] protected bool isOpen = false;
     [SerializeField] protected bool isLocked = false;
 
-    private string openPropmt = "Close";
-    private string closePropmt = "Open";
-    private string lockedPropmt = "Locked";
+    //private string openPropmt = "Close";
+    //private string closePropmt = "Open";
+    //private string lockedPropmt = "Locked";
 
     private string messagePropmt;
 

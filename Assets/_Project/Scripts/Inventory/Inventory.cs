@@ -5,8 +5,10 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public static Inventory Instance { get; private set; }
-    private static int inventorySize = 10;
-    [SerializeField] private List<Slot> inventory = new List<Slot>();
+    private static int inventorySize = 32;
+    [SerializeField] public List<InventorySlot> inventory = new List<InventorySlot>();
+    public IReadOnlyList<InventorySlot> Slots => inventory;
+
 
     private void Awake()
     {
@@ -23,18 +25,36 @@ public class Inventory : MonoBehaviour
 
     private void InitializeInventory()
     {
+        inventory.Clear();
+
+        for(int i = 0; i < inventorySize; i++)
+        {
+            inventory.Add(new InventorySlot());
+        }
+        Debug.Log($"Inventory slot count: {inventory.Count}");
     }
 
     public void AddItem(ItemSO item, int amount = 1)
     {
-        Slot newSlot = new Slot();
-        newSlot.SetItem(item, amount);
-        inventory.Add(newSlot);
+        if(item == null || amount <= 0)
+        {
+            return;
+        }
+
+        int emptySlot = GetFirstEmptySlot();
+
+        if(emptySlot == -1)
+        {
+            Debug.Log("Inventory is full!");
+            return;
+        }
+
+        inventory[emptySlot].SetItem(item, amount);
     }
 
     public bool HasItem(ItemSO item)
     {
-        foreach(Slot slot in inventory)
+        foreach(InventorySlot slot in inventory)
         {
             if(slot.GetItem() == item)
             {
@@ -49,8 +69,7 @@ public class Inventory : MonoBehaviour
     {
         for(int i = 0; i< inventory.Count; i++)
         {
-            bool hasItem = inventory[i].HasAnyItem();
-            if(!hasItem)
+            if (!inventory[i].HasAnyItem())
             {
                 return i;
             }
@@ -62,7 +81,7 @@ public class Inventory : MonoBehaviour
     public int GetEmptySlotCount()
     {
         int count = 0;
-        foreach(Slot slot in inventory)
+        foreach(InventorySlot slot in inventory)
         {
             if(!slot.HasAnyItem())
             {

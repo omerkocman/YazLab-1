@@ -15,4 +15,4 @@ MonoBehaviour:
   itemId: Item_Screwdriver
   itemName: Screwdriver
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 3c9547e09bb1bc6580116e51c40ed692, type: 3}
