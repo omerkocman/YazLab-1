@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -101,11 +102,22 @@ public class InventoryUI : MonoBehaviour
 
     private VisualElement CreateSlotElement(InventorySlot slot)
     {
+        Color baseColor = slot.heldItem.itemType.GetColor();
+
         VisualElement slotBox = new VisualElement();
         slotBox.AddToClassList("inventory-slot");
+   
 
         VisualElement icon = new VisualElement();
         icon.AddToClassList("slot-icon");
+
+
+        //Color transparentColor = new Color(baseColor.r, baseColor.g, baseColor.b, 0.3f);
+
+        slotBox.style.borderLeftColor = baseColor;
+        //slotBox.style.borderTopColor = baseColor;
+        //slotBox.style.borderRightColor = baseColor;
+        //slotBox.style.borderBottomColor = baseColor;
 
         Sprite itemIcon = slot.heldItem.icon;
 

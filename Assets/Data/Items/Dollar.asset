@@ -15,4 +15,5 @@ MonoBehaviour:
   itemId: Item_Dollar_100
   itemName: 100 Dollar
   description: Crisp banknotes. Used for trading and bribes.
+  itemType: 6
   icon: {fileID: -6184943901247564455, guid: a730fd0db0569754881e1aafc158e987, type: 3}

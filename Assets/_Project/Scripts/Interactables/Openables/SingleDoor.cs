@@ -1,19 +1,21 @@
 using DG.Tweening;
 using System;
+using Unity.Collections.Tests.CoreCLR.TestJobs;
 using UnityEngine;
 
 public class SingleDoor : Interactable
 {
     [Header("Door Settings")]
+    [SerializeField] private string doorName = "Security Door";
     [SerializeField] private bool isOpen;
     [SerializeField] private float duration = 1f;
     [SerializeField] private bool revert = false;
     [SerializeField, Range(0, 2)] private float slideRange = 1.8f;
+
+    [SerializeField] private Lock doorLock;
     private Vector3 _openPosition;
     private Vector3 _closedPosition;
-
-    protected override string promptMessage => isOpen ? "Close" : "Open";
-    protected override string descriptionMessage => "";
+    protected override string descriptionMessage => (doorLock != null && doorLock.IsLocked) ? $"Requires {doorLock.RequiredKey.itemName}" : "";
 
     protected override void Awake()
     {
@@ -30,9 +32,26 @@ public class SingleDoor : Interactable
         }
     }
 
-    public override void Interact()
+    public override void Interact(Inventory inventory)
     {
-        if(isOpen)
+        if(doorLock != null && doorLock.IsLocked)
+        {
+            bool unlocked = doorLock.TryUnlock(inventory);
+
+            if(!unlocked)
+            {
+                Debug.Log(doorLock.LockedFeedback);
+                return;
+            }
+
+        }
+
+        ToggleDoor();
+    }
+
+    public void ToggleDoor()
+    {
+        if (isOpen)
         {
             OnClose();
         }
@@ -62,4 +81,21 @@ public class SingleDoor : Interactable
         transform.DOLocalMove(targetPosition, duration).SetEase(Ease.OutQuad);
     }
 
+    protected override string promptMessage
+    {
+        get
+        {
+            if (doorLock != null && doorLock.IsLocked)
+            {
+                _outline.ChangeColor(Color.red);
+                return $"Unlock <color=#E63946>{doorName}</color>";
+            }
+
+            _outline.ChangeColor(Color.white);
+
+            return isOpen
+                ? $"Close <color=#7D8DA1>{doorName}</color>"
+                : $"Open <color=#52B788>{doorName}</color>";
+        }
+    }
 }

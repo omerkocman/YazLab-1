@@ -33,6 +33,11 @@ public class InteractableOutline
         }
     }
 
+    public void ChangeColor(Color color)
+    {
+        _outline.OutlineColor = color;
+    }
+
     private void SetDefaultSettings()
     {
         _outline.OutlineMode = Outline.Mode.OutlineVisible;

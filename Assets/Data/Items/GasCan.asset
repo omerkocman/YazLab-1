@@ -15,4 +15,5 @@ MonoBehaviour:
   itemId: Item_GasCan
   itemName: Gas Can
   description: Flammable fuel canister for generators.
+  itemType: 3
   icon: {fileID: -3121809726235195124, guid: a7258842e52dbbc4eb1180357e5fb387, type: 3}

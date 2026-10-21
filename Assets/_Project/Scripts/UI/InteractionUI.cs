@@ -49,7 +49,6 @@ public class InteractionUI : MonoBehaviour
         titleLabel.text = actionName;
         descLabel.text = description;
 
-        // Açıklama boşsa alanı gizleyerek kartın küçülmesini sağlar
         descLabel.style.display = string.IsNullOrEmpty(description) ? DisplayStyle.None : DisplayStyle.Flex;
 
         interactionCard.style.display = DisplayStyle.Flex;

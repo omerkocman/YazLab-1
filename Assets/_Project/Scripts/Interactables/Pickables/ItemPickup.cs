@@ -5,7 +5,7 @@ public class ItemPickup : Interactable
     [SerializeField] private ItemSO heldItem;
     [SerializeField] private int amount = 1;
 
-    protected override string promptMessage => $"Pick up {heldItem.itemName}";
+    protected override string promptMessage => $"Pick up <color=#{heldItem.itemType.GetHexColor()}>{heldItem.itemName}</color>";
     protected override string descriptionMessage => heldItem.description;
 
     protected override void Awake()
@@ -14,7 +14,7 @@ public class ItemPickup : Interactable
         
     }
     
-    public override void Interact()
+    public override void Interact(Inventory inventory)
     {
         Inventory.Instance.AddItem(heldItem, amount);
         Destroy(gameObject);

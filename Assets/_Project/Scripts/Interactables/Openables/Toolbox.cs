@@ -12,7 +12,8 @@ public class Toolbox : Interactable
     private Quaternion _closedRotation;
     private Quaternion _openRotation;
 
-    protected override string promptMessage => isOpen ? "Close" : "Open";
+    protected override string promptMessage => isOpen ? $"Close {nameof(Toolbox)}" : "Open";
+    protected override string descriptionMessage => "";
 
     protected override void Awake()
     {
@@ -28,7 +29,7 @@ public class Toolbox : Interactable
 
     }
 
-    public override void Interact()
+    public override void Interact(Inventory inventory)
     {
         if(isOpen)
         {

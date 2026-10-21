@@ -15,4 +15,5 @@ MonoBehaviour:
   itemId: Item_Screwdriver_Blue
   itemName: Blue Screwdriver
   description: Handy tool to open panels and grates.
+  itemType: 1
   icon: {fileID: -2122532899253755317, guid: 952eb26f7956596469a928c051cabb37, type: 3}

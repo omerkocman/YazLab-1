@@ -9,7 +9,7 @@ public abstract class Interactable : MonoBehaviour
     protected virtual string descriptionMessage => "Description";
     [SerializeField] private Transform _uiPoint;
 
-    private InteractableOutline _outline;
+    protected InteractableOutline _outline;
 
     protected virtual void Awake()
     {
@@ -17,7 +17,7 @@ public abstract class Interactable : MonoBehaviour
 
     }
 
-    public abstract void Interact();
+    public abstract void Interact(Inventory inventory);
 
     public virtual void Highlight()
     {
