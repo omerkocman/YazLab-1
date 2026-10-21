@@ -44,9 +44,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3df61f736df1c3b45924bf75ce02a6af, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Pickable
+  m_EditorClassIdentifier: Assembly-CSharp::ItemPickup
   _uiPoint: {fileID: 0}
-  itemData: {fileID: 11400000, guid: e4fc016f26d8ef44094d78dca2074472, type: 2}
+  heldItem: {fileID: 11400000, guid: e4fc016f26d8ef44094d78dca2074472, type: 2}
   amount: 1
 --- !u!1001 &4154932203185516813
 PrefabInstance:

@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df61f736df1c3b45924bf75ce02a6af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemPickup
-  itemData: {fileID: 11400000, guid: 01939842b30a97c478f50ce57b9a788e, type: 2}
+  _uiPoint: {fileID: 0}
+  heldItem: {fileID: 11400000, guid: 01939842b30a97c478f50ce57b9a788e, type: 2}
   amount: 1
 --- !u!1001 &7646761706035054061
 PrefabInstance:

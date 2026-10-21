@@ -1,0 +1,16 @@
+:root {
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.crosshair {
+    background-color: rgb(255, 255, 255);
+    width: 10px;
+    height: 10px;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+}

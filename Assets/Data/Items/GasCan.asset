@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af5d1dc0d3ff6e041a2a1bd44bf00295, type: 3}
-  m_Name: Money
+  m_Name: GasCan
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  itemId: money
-  itemName: Money
-  description: 
-  icon: {fileID: 21300000, guid: 1e86b79d4abf5369a5016faa09bfc9f7, type: 3}
+  itemId: Item_GasCan
+  itemName: Gas Can
+  description: Flammable fuel canister for generators.
+  icon: {fileID: -3121809726235195124, guid: a7258842e52dbbc4eb1180357e5fb387, type: 3}

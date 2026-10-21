@@ -1,0 +1,55 @@
+.interaction-root {
+    width: 100%;
+    height: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 90px;
+}
+
+.interaction-card {
+    min-width: 280px;
+    max-width: 380px;
+    padding: 16px 20px;
+    background-color: rgba(20, 24, 30, 0.75);
+    border-radius: 14px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+.interaction-header {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+/*     border-bottom-width: 1px;
+    border-bottom-color: rgba(255, 255, 255, 0.08); */
+}
+
+.interaction-key {
+    font-size: 15px;
+    -unity-font-style: bold;
+    color: rgb(245, 247, 250);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.1);
+    margin-right: 12px;
+}
+
+.interaction-title {
+    font-size: 18px;
+    -unity-font-style: bold;
+    color: rgb(235, 240, 245);
+    padding: 0;
+    margin: 0;
+}
+
+.interaction-desc {
+    font-size: 15px;
+    color: rgb(190, 205, 220);
+    white-space: normal;
+    padding: 0;
+    margin: 0;
+    line-height: 125%;
+}

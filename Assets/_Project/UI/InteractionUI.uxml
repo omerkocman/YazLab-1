@@ -1,0 +1,12 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/InteractionUI.uss?fileID=7433441132597879392&amp;guid=f487a38cfbf53204a9bf7c2080fdd2a8&amp;type=3#InteractionUI"/>
+    <ui:VisualElement name="interaction-root" class="interaction-root">
+        <ui:VisualElement name="interaction-card" class="interaction-card">
+            <ui:VisualElement name="interaction-header" class="interaction-header">
+                <ui:Label text="E" name="interaction-key" class="interaction-key"/>
+                <ui:Label text="Pick up Screwdriver" name="interaction-title" class="interaction-title"/>
+            </ui:VisualElement>
+            <ui:Label text="Used for unscrewing ventilation grates and electronic panels." name="interaction-desc" class="interaction-desc"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -50,21 +50,20 @@ public class PlayerInteraction : MonoBehaviour
                     ResetCurrentInteractable();
                     SetCurrentInteractable(interactable);
                 }
-                // if
-                //InteractionUI.Instance.Show(_input.GetInteractionBindingName(), currentInteractable.GetPropmt(), interactable);
-                
+                InteractionUI.Instance.ShowPrompt(currentInteractable.GetPropmt(), description: currentInteractable.GetDescription(), _input.GetInteractionBindingName());
+
             }
 
             else
             {
-                //InteractionUI.Instance.Hide();
+                InteractionUI.Instance.HidePrompt();
                 ResetCurrentInteractable();
             }
         }
 
         else
         {
-            //InteractionUI.Instance.Hide();
+            InteractionUI.Instance.HidePrompt();
             ResetCurrentInteractable();
         }
     }

@@ -1,27 +1,40 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-[RequireComponent(typeof(UIDocument))]
 public class InventoryUI : MonoBehaviour
 {
-    [Header("Inventory Settings")]
-    //[SerializeField] private int slotCapacity = 32;
-    //public List<InventorySlot> slots = new List<InventorySlot>();
+    [Header("References")]
+    [SerializeField] private UIDocument uiDocument;
+    [SerializeField] private Inventory playerInventory;
+    
 
-    private bool isOpen = false;
-
-    private UIDocument uiDocument;
     private VisualElement root;
     private VisualElement inventoryContainer;
-    private List<VisualElement> uiSlotElements = new List<VisualElement>();
+    private bool isOpen = false;
+    private bool isDirty = true;
 
     private void Awake()
     {
-        uiDocument = GetComponent<UIDocument>();
+        if(uiDocument == null)
+        {
+            uiDocument = GetComponent<UIDocument>();
+        }
+
+        if (playerInventory == null)
+        {
+            playerInventory = Inventory.Instance;
+        }
+    }
+
+    private void Update()
+    {
+        if(Keyboard.current.tabKey.wasPressedThisFrame)
+        {
+            ToggleInventory();
+        }
     }
 
     private void OnEnable()
@@ -30,96 +43,126 @@ public class InventoryUI : MonoBehaviour
 
         inventoryContainer = root.Q<VisualElement>("inventory-container");
 
-        if (inventoryContainer == null)
+        Label inventoryText = new Label();
+        inventoryText.AddToClassList("inventory-text");
+
+        inventoryText.text = "Inventory";
+
+        inventoryContainer.Add(inventoryText);
+
+        if (playerInventory != null)
         {
-            Debug.Log("inventory-container not found! Check UXML name value");
+            playerInventory.OnInventoryChanged += OnInventoryUpdated;
+        }
+        
+        SetInventoryVisibility(false);
+    }
+
+    private void OnDisable()
+    {
+        if(playerInventory != null)
+        {
+            playerInventory.OnInventoryChanged -= OnInventoryUpdated;
+        }
+    }
+
+    private void OnInventoryUpdated()
+    {
+        if(isOpen)
+        {
+            RefreshUI();
+        }
+
+        isDirty = true;
+    }
+
+    private void RefreshUI()
+    {
+        if(root == null || inventoryContainer == null)
+        {
             return;
         }
 
-        uiSlotElements = inventoryContainer
-     .Query<VisualElement>(name: "inventory-slot")
-     .ToList();
+        inventoryContainer.Clear();
 
-        if (uiSlotElements.Count == 0)
+        IReadOnlyList<InventorySlot> slots = Inventory.Instance.GetInventoryList();
+
+        foreach(InventorySlot slot in slots)
         {
-            Debug.Log("inventory-slot not found! Check UXML name value");
-            return;
-        }
-
-        SetInventoryVisible(false);
-        UpdateUI();
-    }
-
-    private void SetInventoryVisible(bool visible)
-    {
-        isOpen = visible;
-
-        root.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
-    }
-
-    private void Update()
-    {
-        if(Keyboard.current.tabKey.wasPressedThisFrame)
-        {
-            SetInventoryVisible(!isOpen);
-            if(isOpen)
+            if(slot.heldItem == null)
             {
-                UpdateUI();
-            }
-        }
-    }
-
-    private void UpdateUI()
-    {
-        if(Inventory.Instance == null)
-        {
-            return;
-        }
-
-        IReadOnlyList<InventorySlot> inventory = Inventory.Instance.Slots;
-
-        for(int i = 0; i < uiSlotElements.Count; i++)
-        {
-            VisualElement slotElement = uiSlotElements[i];
-
-            Image icon = slotElement.Q<Image>("slot-icon");
-            Label amountText = slotElement.Q<Label>("slot-text");
-
-            if (icon == null || amountText == null)
-            {
-                Debug.LogWarning($"Slot: {i} slot-icon or slot-text not found!");
                 continue;
             }
 
-            if(i >= inventory.Count)
-            {
-                icon.image = null;
-                icon.style.display = DisplayStyle.None;
-                amountText.text = "";
-                continue;
-            }
+            VisualElement slotElement = CreateSlotElement(slot);
+            inventoryContainer.Add(slotElement);
+        }
+    }
 
-            InventorySlot slot = inventory[i];
+    private VisualElement CreateSlotElement(InventorySlot slot)
+    {
+        VisualElement slotBox = new VisualElement();
+        slotBox.AddToClassList("inventory-slot");
 
-            if(slot.HasAnyItem())
-            {
-                ItemSO item = slot.GetItem();
+        VisualElement icon = new VisualElement();
+        icon.AddToClassList("slot-icon");
 
-                icon.image = item.icon != null ? item.icon.texture : null;
+        Sprite itemIcon = slot.heldItem.icon;
 
-                icon.style.display = item.icon != null ? DisplayStyle.Flex : DisplayStyle.None;
-                amountText.text = slot.GetAmount() > 1
-                    ? $"x{slot.GetAmount()}"
-                    : "";
-            }
-
-            else
-            {
-                icon.image = null;
-                icon.style.display = DisplayStyle.None;
-                amountText.text = "";
-            }
+        if(itemIcon != null)
+        {
+            icon.style.backgroundImage= new StyleBackground(itemIcon);
         }
 
+        slotBox.Add(icon);
+
+        VisualElement slotTextContainer = new VisualElement();
+        slotTextContainer.AddToClassList("slot-text-container");
+
+        string itemName = slot.heldItem.itemName;
+        int itemAmount = slot.itemAmount;
+
+        Label labelItemName = new Label();
+        labelItemName.AddToClassList("item-text");
+
+        if(itemName != null)
+        {
+            labelItemName.text = itemName;
+        }
+
+        Label labelItemAmount = new Label();
+        labelItemAmount.AddToClassList("item-amount");
+        labelItemAmount.text = $"x{itemAmount}";
+
+        slotTextContainer.Add(labelItemName);
+        slotTextContainer.Add(labelItemAmount);
+
+        slotBox.Add(slotTextContainer);
+
+        return slotBox;
     }
+
+    private void ToggleInventory()
+    {
+        isOpen = !isOpen;
+        SetInventoryVisibility(isOpen);
+
+        if(isOpen)
+        {
+            //cursorlock
+            if(isDirty)
+            {
+                RefreshUI();
+                isDirty = false;
+            }
+        }
+        //else?
+    }
+
+    private void SetInventoryVisibility(bool isVisible)
+    {
+        root.style.display = isVisible ? DisplayStyle.Flex : DisplayStyle.None;
+    }
+
+
 }

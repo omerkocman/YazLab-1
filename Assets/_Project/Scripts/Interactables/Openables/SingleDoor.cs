@@ -13,6 +13,7 @@ public class SingleDoor : Interactable
     private Vector3 _closedPosition;
 
     protected override string promptMessage => isOpen ? "Close" : "Open";
+    protected override string descriptionMessage => "";
 
     protected override void Awake()
     {

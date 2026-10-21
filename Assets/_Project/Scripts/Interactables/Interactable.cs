@@ -6,6 +6,7 @@ public abstract class Interactable : MonoBehaviour
     
     [Header("Interaction Settings")]
     protected virtual string promptMessage => "Interact";
+    protected virtual string descriptionMessage => "Description";
     [SerializeField] private Transform _uiPoint;
 
     private InteractableOutline _outline;
@@ -37,6 +38,11 @@ public abstract class Interactable : MonoBehaviour
     public string GetPropmt()
     {
         return promptMessage;
+    }
+
+    public string GetDescription()
+    {
+        return descriptionMessage;
     }
 
     public Vector3 GetUiPoint()

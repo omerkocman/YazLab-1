@@ -4,91 +4,91 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public static Inventory Instance { get; private set; }
-    private static int inventorySize = 32;
-    [SerializeField] public List<InventorySlot> inventory = new List<InventorySlot>();
-    public IReadOnlyList<InventorySlot> Slots => inventory;
+    [SerializeField] private List<InventorySlot> inventory = new List<InventorySlot>();
 
+    public IReadOnlyList<InventorySlot> GetInventoryList() => inventory;
+
+    public event Action OnInventoryChanged;
+
+    public static Inventory Instance { get; private set; }
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if(Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
         Instance = this;
-
-        InitializeInventory();
-    }
-
-    private void InitializeInventory()
-    {
-        inventory.Clear();
-
-        for(int i = 0; i < inventorySize; i++)
-        {
-            inventory.Add(new InventorySlot());
-        }
-        Debug.Log($"Inventory slot count: {inventory.Count}");
     }
 
     public void AddItem(ItemSO item, int amount = 1)
     {
-        if(item == null || amount <= 0)
+        if (amount <= 0) return;
+
+        InventorySlot slot = GetSlotByItem(item);
+
+        if(slot != null)
         {
-            return;
+            slot.AddAmount(amount);
+        }
+        else
+        {
+            inventory.Add(new InventorySlot(item, amount));
         }
 
-        int emptySlot = GetFirstEmptySlot();
-
-        if(emptySlot == -1)
-        {
-            Debug.Log("Inventory is full!");
-            return;
-        }
-
-        inventory[emptySlot].SetItem(item, amount);
+        OnInventoryChanged?.Invoke();
     }
 
-    public bool HasItem(ItemSO item)
+    public bool RemoveItem(ItemSO item, int amount = 1)
     {
+        InventorySlot slot = GetSlotByItem(item);
+
+        if(slot == null ||slot.itemAmount < amount)
+        {
+            return false;
+        }
+
+        if(slot.RemoveAmount(amount))
+        {
+            inventory.Remove(slot);
+        }
+
+        OnInventoryChanged?.Invoke();
+        return true;
+    }
+
+    private InventorySlot GetSlotByItem(ItemSO item)
+    {
+        if(item == null)
+        {
+            return null;
+        }
+
         foreach(InventorySlot slot in inventory)
         {
-            if(slot.GetItem() == item)
+            if(slot.heldItem == item)
+            {
+                return slot;
+            }
+        }
+
+        return null;
+    }
+
+    public bool HasItem(ItemSO item, int requiredAmount = 1)
+    {
+        InventorySlot slot = GetSlotByItem(item);
+
+        if(slot != null)
+        {
+            if(slot.itemAmount >= requiredAmount)
             {
                 return true;
             }
         }
 
         return false;
-    }
-
-    public int GetFirstEmptySlot()
-    {
-        for(int i = 0; i< inventory.Count; i++)
-        {
-            if (!inventory[i].HasAnyItem())
-            {
-                return i;
-            }
-        }
-
-        return -1;
-    }
-
-    public int GetEmptySlotCount()
-    {
-        int count = 0;
-        foreach(InventorySlot slot in inventory)
-        {
-            if(!slot.HasAnyItem())
-            {
-                count++;
-            }
-        }
-
-        return count;
     }
 }

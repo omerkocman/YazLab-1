@@ -1,0 +1,4 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/CrosshairUI.uss?fileID=7433441132597879392&amp;guid=74e5f8aed83f1d749bc1d3752a3cb631&amp;type=3#CrosshairUI"/>
+    <ui:VisualElement name="crosshair" class="crosshair"/>
+</ui:UXML>
