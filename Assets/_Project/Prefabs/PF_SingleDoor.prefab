@@ -78,10 +78,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a388b929ffadd148987da06161a9c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SingleDoor
+  _uiPoint: {fileID: 0}
+  doorName: Security Door
   isOpen: 0
   duration: 1
   revert: 0
   slideRange: 1.8
+  doorLock: {fileID: 0}
 --- !u!114 &2191484644624710151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,10 +97,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a388b929ffadd148987da06161a9c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SingleDoor
+  _uiPoint: {fileID: 0}
+  doorName: Security Door
   isOpen: 0
   duration: 1
   revert: 1
   slideRange: 1.8
+  doorLock: {fileID: 0}
 --- !u!1 &8959577410158075614
 GameObject:
   m_ObjectHideFlags: 0

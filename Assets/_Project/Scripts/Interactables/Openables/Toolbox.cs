@@ -29,7 +29,7 @@ public class Toolbox : Interactable
 
     }
 
-    public override void Interact(Inventory inventory)
+    public override void Interact(Player player)
     {
         if(isOpen)
         {

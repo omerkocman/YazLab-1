@@ -14,9 +14,9 @@ public class ItemPickup : Interactable
         
     }
     
-    public override void Interact(Inventory inventory)
+    public override void Interact(Player player)
     {
-        Inventory.Instance.AddItem(heldItem, amount);
+        player.Inventory.AddItem(heldItem, amount);
         Destroy(gameObject);
     }
 }

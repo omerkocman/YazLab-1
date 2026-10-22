@@ -9,7 +9,7 @@ public class InventoryUI : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private UIDocument uiDocument;
-    [SerializeField] private Inventory playerInventory;
+    [SerializeField] private Player player;
     
 
     private VisualElement root;
@@ -24,10 +24,6 @@ public class InventoryUI : MonoBehaviour
             uiDocument = GetComponent<UIDocument>();
         }
 
-        if (playerInventory == null)
-        {
-            playerInventory = Inventory.Instance;
-        }
     }
 
     private void Update()
@@ -35,6 +31,19 @@ public class InventoryUI : MonoBehaviour
         if(Keyboard.current.tabKey.wasPressedThisFrame)
         {
             ToggleInventory();
+        }
+    }
+
+    private void Start()
+    {
+        if(player == null)
+        {
+            player = GetComponent<Player>();
+        }
+
+        if (player != null && player.Inventory != null)
+        {
+            player.Inventory.OnInventoryChanged += OnInventoryUpdated;
         }
     }
 
@@ -51,20 +60,19 @@ public class InventoryUI : MonoBehaviour
 
         inventoryContainer.Add(inventoryText);
 
-        if (playerInventory != null)
-        {
-            playerInventory.OnInventoryChanged += OnInventoryUpdated;
-        }
-        
+       
+
         SetInventoryVisibility(false);
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        if(playerInventory != null)
+
+        if (player != null && player.Inventory != null)
         {
-            playerInventory.OnInventoryChanged -= OnInventoryUpdated;
+            player.Inventory.OnInventoryChanged -= OnInventoryUpdated;
         }
+
     }
 
     private void OnInventoryUpdated()
@@ -86,7 +94,7 @@ public class InventoryUI : MonoBehaviour
 
         inventoryContainer.Clear();
 
-        IReadOnlyList<InventorySlot> slots = Inventory.Instance.GetInventoryList();
+        IReadOnlyList<InventorySlot> slots = player.Inventory.GetInventoryList();
 
         foreach(InventorySlot slot in slots)
         {

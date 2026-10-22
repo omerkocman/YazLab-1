@@ -10,17 +10,15 @@ public class Inventory : MonoBehaviour
 
     public event Action OnInventoryChanged;
 
-    public static Inventory Instance { get; private set; }
-
     private void Awake()
     {
-        if(Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        //if(Instance != null && Instance != this)
+        //{
+        //    Destroy(gameObject);
+        //    return;
+        //}
 
-        Instance = this;
+        //Instance = this;
     }
 
     public void AddItem(ItemSO item, int amount = 1)

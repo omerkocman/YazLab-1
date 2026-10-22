@@ -5,7 +5,7 @@ public class PlayerInteraction : MonoBehaviour
     [Header("Interaction Settings")]
     [SerializeField] private float playerReach = 3f;
     [SerializeField] private Camera playerCamera;
-    [SerializeField] private Inventory playerInventory;
+    [SerializeField] private Player player;
     private PlayerInputHandler _input;
 
     private Interactable currentInteractable;
@@ -29,7 +29,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             if(currentInteractable != null)
             {
-                currentInteractable.Interact(playerInventory);
+                currentInteractable.Interact(player);
             }
         }
         

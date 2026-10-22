@@ -17,7 +17,7 @@ public abstract class Interactable : MonoBehaviour
 
     }
 
-    public abstract void Interact(Inventory inventory);
+    public abstract void Interact(Player player);
 
     public virtual void Highlight()
     {

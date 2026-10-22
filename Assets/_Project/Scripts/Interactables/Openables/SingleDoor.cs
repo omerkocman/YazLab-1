@@ -32,11 +32,11 @@ public class SingleDoor : Interactable
         }
     }
 
-    public override void Interact(Inventory inventory)
+    public override void Interact(Player player)
     {
         if(doorLock != null && doorLock.IsLocked)
         {
-            bool unlocked = doorLock.TryUnlock(inventory);
+            bool unlocked = doorLock.TryUnlock(player.Inventory);
 
             if(!unlocked)
             {
