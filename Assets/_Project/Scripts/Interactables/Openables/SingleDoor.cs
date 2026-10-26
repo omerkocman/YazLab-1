@@ -3,6 +3,7 @@ using System;
 using Unity.Collections.Tests.CoreCLR.TestJobs;
 using UnityEngine;
 
+[SelectionBase]
 public class SingleDoor : Interactable
 {
     [Header("Door Settings")]
@@ -11,20 +12,24 @@ public class SingleDoor : Interactable
     [SerializeField] private float duration = 1f;
     [SerializeField] private bool revert = false;
     [SerializeField, Range(0, 2)] private float slideRange = 1.8f;
-
     [SerializeField] private Lock doorLock;
+
+
     private Vector3 _openPosition;
     private Vector3 _closedPosition;
     protected override string descriptionMessage => (doorLock != null && doorLock.IsLocked) ? $"Requires {doorLock.RequiredKey.itemName}" : "";
+    public bool IsOpen => isOpen;
 
     protected override void Awake()
     {
         base.Awake();
 
-        slideRange = -slideRange;
-
         _closedPosition = transform.localPosition;
-        _openPosition = transform.localPosition + new Vector3(0f, 0f, revert ? -slideRange : slideRange);
+
+        float direction = revert ? -slideRange : slideRange;
+        Vector3 slideOffset = -transform.forward * direction;
+
+        _openPosition = _closedPosition + slideOffset;
         
         if (isOpen)
         {

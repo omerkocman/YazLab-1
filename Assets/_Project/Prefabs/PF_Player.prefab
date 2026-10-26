@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7496097603564711698}
   - component: {fileID: 774276221696445567}
   - component: {fileID: 4864859980844046909}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4135013735270702856}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerCameraRoot
   m_TagString: CinemachineTarget
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 4272872606043029732}
   - component: {fileID: 4220982254518762746}
   - component: {fileID: 2014033326571103980}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 4528848615177082589}
   - component: {fileID: 7505239988326667797}
   - component: {fileID: 3562622922273575649}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: PF_Player
   m_TagString: Player
   m_Icon: {fileID: 0}

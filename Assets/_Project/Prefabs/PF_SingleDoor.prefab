@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4131258054965816741}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UI_Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 5454121222811505382}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 1.6}
+  m_LocalPosition: {x: 0.25, y: 0, z: 1.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41,8 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3781358821292258556}
   - component: {fileID: 2137868319468676848}
-  - component: {fileID: 2191484644624710151}
-  m_Layer: 0
+  - component: {fileID: 5482998355920457477}
+  m_Layer: 6
   m_Name: PF_SingleDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,14 +78,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a388b929ffadd148987da06161a9c45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SingleDoor
-  _uiPoint: {fileID: 0}
+  type: 2
+  interactionPoint: {fileID: 4131258054965816741}
   doorName: Security Door
   isOpen: 0
   duration: 1
   revert: 0
   slideRange: 1.8
-  doorLock: {fileID: 0}
---- !u!114 &2191484644624710151
+  doorLock: {fileID: 5482998355920457477}
+--- !u!114 &5482998355920457477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,16 +95,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8762074923648413849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a388b929ffadd148987da06161a9c45, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c6e03a67055ef14fac7106d88819762, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SingleDoor
-  _uiPoint: {fileID: 0}
-  doorName: Security Door
-  isOpen: 0
-  duration: 1
-  revert: 1
-  slideRange: 1.8
-  doorLock: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::Lock
+  isLocked: 0
+  requiredKey: {fileID: 11400000, guid: 420d68a6961486547842d585bd269724, type: 2}
+  lockedFeedback: Requires keycard
 --- !u!1 &8959577410158075614
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +116,7 @@ GameObject:
   - component: {fileID: 5976772686415900152}
   - component: {fileID: 3898002204324351583}
   - component: {fileID: 3467973496182686597}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +580,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 369
+  m_VersionIndex: 459
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

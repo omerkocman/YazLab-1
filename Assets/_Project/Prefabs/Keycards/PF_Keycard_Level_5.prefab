@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Visual
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: c55969dde374d8a4fa82d1cf0ac2615d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -4683669308469848369, guid: c55969dde374d8a4fa82d1cf0ac2615d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -75,6 +79,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c55969dde374d8a4fa82d1cf0ac2615d, type: 3}
       propertyPath: m_Name
       value: PF_Keycard_Level_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c55969dde374d8a4fa82d1cf0ac2615d, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
