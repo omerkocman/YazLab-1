@@ -1,6 +1,5 @@
 using DG.Tweening;
 using System;
-using Unity.Collections.Tests.CoreCLR.TestJobs;
 using UnityEngine;
 
 [SelectionBase]
