@@ -4,7 +4,7 @@ using Unity.Collections.Tests.CoreCLR.TestJobs;
 using UnityEngine;
 
 [SelectionBase]
-public class SingleDoor : Interactable
+public class Door : Interactable
 {
     [Header("Door Settings")]
     [SerializeField] private string doorName = "Security Door";
