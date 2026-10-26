@@ -5,16 +5,17 @@ TagManager:
   serializedVersion: 3
   tags:
   - Interactable
+  - CinemachineTarget
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Interactable
-  - 
-  - 
+  - Obstacle
+  - Ground
   - 
   - 
   - 
