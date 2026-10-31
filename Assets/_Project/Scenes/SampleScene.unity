@@ -2898,6 +2898,37 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &976851976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 976851977}
+  m_Layer: 0
+  m_Name: Test Destination
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &976851977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976851976}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.10474, y: -0, z: 1.49997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &985322925
 GameObject:
   m_ObjectHideFlags: 0
@@ -3013,6 +3044,10 @@ PrefabInstance:
     - target: {fileID: 8543573814126910518, guid: a66fa7a336d395d41b191ee294036824, type: 3}
       propertyPath: m_Name
       value: PF_Switch
+      objectReference: {fileID: 0}
+    - target: {fileID: 8543573814126910518, guid: a66fa7a336d395d41b191ee294036824, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6093,6 +6128,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2367873453587792290, guid: 91e9fb0731f1c4e4fbfea44422b91bef, type: 3}
       propertyPath: isOpen
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3334428327790829210, guid: 91e9fb0731f1c4e4fbfea44422b91bef, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3499478270618706739, guid: 91e9fb0731f1c4e4fbfea44422b91bef, type: 3}
@@ -6101,7 +6140,7 @@ PrefabInstance:
       objectReference: {fileID: 1341057621}
     - target: {fileID: 3499478270618706739, guid: 91e9fb0731f1c4e4fbfea44422b91bef, type: 3}
       propertyPath: m_VersionIndex
-      value: 483
+      value: 516
       objectReference: {fileID: 0}
     - target: {fileID: 8652903457853807457, guid: 91e9fb0731f1c4e4fbfea44422b91bef, type: 3}
       propertyPath: m_Name
@@ -6184,3 +6223,4 @@ SceneRoots:
   - {fileID: 985322927}
   - {fileID: 1029895427}
   - {fileID: 1220681169}
+  - {fileID: 976851977}

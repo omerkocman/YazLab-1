@@ -1,5 +1,3 @@
-using DG.Tweening;
-using System;
 using System.Linq;
 using UnityEngine;
 
@@ -11,6 +9,8 @@ public enum RobotState
     MovingToExplorePoint,
     MovingToTarget,
     Interacting,
+    MovingToDoor,
+    OpeningDoor,
     Completed,
     Failed
 }
@@ -31,6 +31,7 @@ public class RobotBrain : MonoBehaviour
     [SerializeField, Min(0.1f)] private float interactionDistance = 2f;
     [SerializeField, Min(1f)] private float targetMoveTimeout = 20f;
 
+    [SerializeField] private Transform testDestination;
 
     public RobotState CurrentState { get; private set; } = RobotState.Idle;
     public RobotTaskType CurrentTask { get; private set; } = RobotTaskType.None;
@@ -42,10 +43,17 @@ public class RobotBrain : MonoBehaviour
     private RobotSensor sensor;
     private RobotExplorer explorer;
 
+    // Switch
     private Switch targetSwitch;
     private RobotDetectable targetDetectable;
     private bool switchInteractionStarted;
     private float targetMoveStartedAt;
+
+    // Door
+    private DoorInteractable targetDoor;
+    private bool doorOpenRequested;
+    private float doorMoveStartedAt;
+    private Vector3 targetDoorApproachPosition;
 
     private void Awake()
     {
@@ -56,6 +64,22 @@ public class RobotBrain : MonoBehaviour
 
     private void Update()
     {
+        //if(testDestination != null && CurrentState != RobotState.Idle && CurrentState != RobotState.Failed && CurrentState != RobotState.Completed)
+        //{
+            
+        //    if(!navigation.TryMoveTo(testDestination.position))
+        //    {
+        //        Debug.Log("[ROBOT BRAIN] Cant reach to TestDestination!");
+        //        SetState(RobotState.Failed);
+        //        return;
+
+        //    }
+
+        //    Debug.Log("[ROBOT BRAIN] Reached to TestDestination!");
+        //    SetState(RobotState.Completed);
+        //    return;
+        //}
+
         switch(CurrentState)
         {
             case RobotState.Searching:
@@ -77,6 +101,15 @@ public class RobotBrain : MonoBehaviour
             case RobotState.Interacting:
                 HandleInteracting();
                 break;
+
+            case RobotState.MovingToDoor:
+                HandleMovingToDoor();
+                break;
+
+            case RobotState.OpeningDoor:
+                HandleOpeningDoor();
+                break;
+
         }
     }
 
@@ -113,7 +146,7 @@ public class RobotBrain : MonoBehaviour
                 return;
             }
 
-            if(navigation.TryMoveNear(targetSwitch.InteractionPoint))
+            if(navigation.TryMoveNear(targetSwitch.InteractionPosition))
             {
                 targetMoveStartedAt = Time.time;
                 SetState(RobotState.MovingToTarget);
@@ -127,6 +160,46 @@ public class RobotBrain : MonoBehaviour
 
             targetSwitch = null;
             targetDetectable = null;
+
+        }
+
+        foreach(RobotDetectable detected in sensor.VisibleObjects)
+        {
+            if(detected.Type != RobotObjectType.Door)
+            {
+                continue;
+            }
+
+            DoorInteractable door = detected.GetComponent<DoorInteractable>();
+
+            if(door == null || door.IsOpen || door.IsMoving)
+            {
+                continue;
+            }
+
+            Transform a = door.InteractionPositionA;
+            Transform b = door.InteractionPositionB;
+
+            if(a != null && b != null)
+            {
+                float distanceA = Vector3.Distance(transform.position, a.position);
+                float distanceB = Vector3.Distance(transform.position, b.position);
+
+                if(distanceB < distanceA)
+                {
+                    (a, b) = (b, a);
+                }
+            }
+
+            if(TryApproachDoor(door, a))
+            {
+                return;
+            }
+
+            if(TryApproachDoor(door, b))
+            {
+                return;
+            }
 
         }
 
@@ -255,6 +328,134 @@ public class RobotBrain : MonoBehaviour
             SetState(!targetSwitch.IsOpen ? RobotState.Completed : RobotState.Failed);
 
         }
+
+    }
+
+    private void HandleMovingToDoor()
+    {
+        if(targetDoor == null)
+        {
+            SetState(RobotState.Failed);
+            return;
+        }
+
+        if(Time.time - doorMoveStartedAt > targetMoveTimeout)
+        {
+            navigation.Stop();
+
+            Debug.Log("[ROBOT BRAIN] Could not reach door.");
+
+            targetDoor = null;
+            doorOpenRequested = false;
+
+            SetState(RobotState.Exploring);
+            return;
+        }
+
+        if(!navigation.HasReachedDestination())
+        {
+            return;
+        }
+
+        navigation.Stop();
+
+        doorOpenRequested = false;
+
+        SetState(RobotState.OpeningDoor);
+    }
+
+    private void HandleOpeningDoor()
+    {
+        if(targetDoor == null)
+        {
+            SetState(RobotState.Failed);
+            return;
+        }
+
+        if(targetDoor.IsOpen)
+        {
+            Debug.Log("[ROBOT BRAIN] Door opened successfully");
+
+            targetDoor = null;
+            doorOpenRequested = false;
+
+            SetState(RobotState.Searching);
+            return;
+        }
+
+        if(doorOpenRequested)
+        {
+            if(targetDoor.IsMoving)
+            {
+                return;
+            }
+
+            Debug.LogWarning("[ROBOT BRAIN] Door could not be opened.");
+
+            targetDoor = null;
+            doorOpenRequested = false;
+
+            
+            SetState(RobotState.Exploring);
+            return;
+        }
+
+        float distance = Vector3.Distance(transform.position, targetDoorApproachPosition);
+
+
+        if(distance > 1f)
+        {
+            Debug.LogWarning("[ROBOT BRAIN] Too far from door.");
+
+            targetDoor = null;
+
+            SetState(RobotState.Exploring);
+            return;
+        }
+
+        if (!targetDoor.CanInteract(gameObject))
+        {
+            targetDoor = null;
+            SetState(RobotState.Exploring);
+            return;
+        }
+
+        doorOpenRequested = true;
+
+        targetDoor.Interact(gameObject);
+    }
+
+    private bool TryApproachDoor(DoorInteractable door, Transform point)
+    {
+        if(point == null)
+        {
+            return false;
+        }
+
+        float distance = Vector3.Distance(transform.position, point.position);
+
+        if(distance <= 0.85f && navigation.CanReach(point.position))
+        {
+            targetDoor = door;
+            targetDoorApproachPosition = point.position;
+            doorOpenRequested = false;
+
+            SetState(RobotState.OpeningDoor);
+            return true;
+        }
+
+        if(!navigation.TryMoveNear(point.position, 0.4f))
+        {
+            return false;
+        }
+
+        targetDoor = door;
+        targetDoorApproachPosition = point.position;
+        doorMoveStartedAt = Time.time;
+        doorOpenRequested = false;
+
+        SetState(RobotState.MovingToDoor);
+        return true;
 
     }
 

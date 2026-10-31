@@ -1,37 +1,54 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.AI;
 
 [SelectionBase]
+[RequireComponent(typeof(NavMeshObstacle))]
 public class DoorInteractable : InteractableBase
 {
     [Header("Door References")]
     [SerializeField] private bool isOpen;
     [SerializeField, Range(0f, 2f)] private float duration = 1f;
     [SerializeField, Range(0f, 2f)] private float slideRange = 1.8f;
-    [SerializeField] private Transform hingePivot;
+    [SerializeField] private Transform interactionPointA;
+    [SerializeField] private Transform interactionPointB;
+    [SerializeField] private Transform pivot;
+    private bool isMoving;
+
+    public bool IsOpen => isOpen;
+    public bool IsMoving => isMoving;
+
+    public Transform InteractionPositionA => interactionPointA != null ? interactionPointA : transform;
+    public Transform InteractionPositionB => interactionPointB != null ? interactionPointB : transform;
+
+
+    private NavMeshObstacle obstacle;
+
 
     private Vector3 openPosition;
     private Vector3 closePosition;
-
-    private bool isMoving;
 
     protected override void Awake()
     {
         base.Awake();
 
-        if(hingePivot == null)
+        obstacle = GetComponent<NavMeshObstacle>();
+
+        obstacle.enabled = !isOpen;
+
+        if(pivot == null)
         {
-            Debug.LogError("[DOOR INTERACTABLE] HingePivot is null!", this);
+            Debug.LogError("[DOOR INTERACTABLE] Pivot is null!", this);
             enabled = false;
             return;
         }
 
-        closePosition = hingePivot.transform.localPosition;
-        openPosition = hingePivot.transform.localPosition + Vector3.right * slideRange;
+        closePosition = pivot.transform.localPosition;
+        openPosition = pivot.transform.localPosition + Vector3.right * slideRange;
 
         if(isOpen)
         {
-            hingePivot.localPosition = openPosition;
+            pivot.localPosition = openPosition;
         }
 
     }
@@ -91,6 +108,7 @@ public class DoorInteractable : InteractableBase
 
     private void Close()
     {
+        obstacle.enabled = true;
         Move(closePosition, false);
 
     }
@@ -98,20 +116,25 @@ public class DoorInteractable : InteractableBase
     {
         isOpen = targetOpen;
         isMoving = false;
+
+        if(isOpen)
+        {
+            obstacle.enabled = false;
+        }
     }
 
     private void Move(Vector3 targetPosition, bool targetOpen)
     {
         isMoving = true;
 
-        hingePivot.DOLocalMove(targetPosition, duration)
+        pivot.DOLocalMove(targetPosition, duration)
             .SetEase(Ease.OutQuad)
             .OnComplete(() => OnAnimationCompleted(targetOpen));
     }
 
     private void OnDestroy()
     {
-        hingePivot?.DOKill();
+        pivot?.DOKill();
     }
 
    

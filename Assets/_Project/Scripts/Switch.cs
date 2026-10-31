@@ -17,7 +17,7 @@ public class Switch : InteractableBase
     private bool isMoving;
 
 
-    public Vector3 InteractionPoint => interactionPoint != null ? interactionPoint.position : transform.position;
+    public Vector3 InteractionPosition => interactionPoint != null ? interactionPoint.position : transform.position;
 
     public bool IsOpen => isOpen;
     public bool IsMoving => isMoving;

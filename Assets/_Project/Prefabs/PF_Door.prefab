@@ -343,7 +343,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 477
+  m_VersionIndex: 522
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -395,6 +395,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.0000002, y: 3.0000002, z: 0.500002}
   m_Center: {x: 1.0000001, y: 1.5000001, z: -0.250001}
+--- !u!1 &8092465632225221713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5015294061797309065}
+  m_Layer: 0
+  m_Name: InteractionPointB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5015294061797309065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8092465632225221713}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2210887694837002120}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8095038481579393788
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8682922748401578079}
   m_Layer: 8
-  m_Name: HingePivot
+  m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -427,6 +458,37 @@ Transform:
   - {fileID: 2385108475302840001}
   m_Father: {fileID: 2210887694837002120}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8636574172952317405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4682056826872081001}
+  m_Layer: 0
+  m_Name: InteractionPointA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4682056826872081001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8636574172952317405}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2210887694837002120}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8652903457853807457
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +500,7 @@ GameObject:
   - component: {fileID: 2210887694837002120}
   - component: {fileID: 2367873453587792290}
   - component: {fileID: 9215126251041481741}
+  - component: {fileID: 3334428327790829210}
   m_Layer: 8
   m_Name: PF_Door
   m_TagString: Untagged
@@ -459,6 +522,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8682922748401578079}
+  - {fileID: 4682056826872081001}
+  - {fileID: 5015294061797309065}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2367873453587792290
@@ -478,7 +543,9 @@ MonoBehaviour:
   isOpen: 0
   duration: 1
   slideRange: 1.8
-  hingePivot: {fileID: 8682922748401578079}
+  interactionPointA: {fileID: 4682056826872081001}
+  interactionPointB: {fileID: 5015294061797309065}
+  pivot: {fileID: 8682922748401578079}
 --- !u!114 &9215126251041481741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,3 +559,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RobotDetectable
   objectType: 0
+--- !u!208 &3334428327790829210
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8652903457853807457}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1, y: 1.5, z: 0.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 1, y: 1.5, z: -0.25}
+  m_TimeToStationary: 0.5
