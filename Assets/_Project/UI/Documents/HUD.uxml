@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/Styles/HUD.uss?fileID=7433441132597879392&amp;guid=59df87021d64e4641a976fa4fddef244&amp;type=3#HUD"/>
+    <ui:VisualElement name="hud-root" class="hud-root">
+        <ui:VisualElement name="interaction-container" class="interaction-container" style="background-color: rgb(20, 30, 42); padding-right: 10px;">
+            <ui:Label text="E" name="interaction-key" class="interaction-key"/>
+            <ui:Label text="Open Door" name="interaction-prompt" class="interaction-prompt"/>
+        </ui:VisualElement>
+        <ui:Label text="Door is locked!" name="interaction-feedback" class="interaction-feedback"/>
+    </ui:VisualElement>
+</ui:UXML>
