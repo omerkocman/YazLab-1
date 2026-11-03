@@ -16,5 +16,15 @@
             <ui:Label text="Open Door" name="interaction-prompt" class="interaction-prompt"/>
         </ui:VisualElement>
         <ui:Label text="Door is locked!" name="interaction-feedback" class="interaction-feedback"/>
+        <ui:VisualElement name="death-overlay" class="death-overlay">
+            <ui:VisualElement name="death-panel" class="death-panel">
+                <ui:Label text="✕" name="death-indicator" class="death-indicator"/>
+                <ui:Label text="MISSION FAILED" name="death-subtitle" class="death-subtitle"/>
+                <ui:Label text="YOU DIED" name="death-title" class="death-title"/>
+                <ui:Label text="Your vital signs have reached zero." name="death-description" class="death-description"/>
+                <ui:Button text="RESTART MISSION" name="death-restart-button" class="death-restart-button"/>
+                <ui:Label text="SYSTEM STATUS: TERMINATED" name="death-footer" class="death-footer"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

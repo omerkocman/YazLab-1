@@ -34,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
 
         if(IsDead)
         {
-            // Die();
+            Die();
         }
     }
 

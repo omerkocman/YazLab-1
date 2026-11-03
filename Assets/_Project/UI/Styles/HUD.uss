@@ -148,3 +148,148 @@
     margin-top: 10px;
     -unity-font-style: bold;
 }
+
+.death-overlay {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(5, 9, 14, 0.94);
+}
+
+.death-panel {
+    width: 600px;
+    padding: 36px;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(21, 27, 35);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-color: rgb(116, 55, 66);
+    border-right-color: rgb(59, 48, 58);
+    border-bottom-color: rgb(59, 48, 58);
+    border-left-color: rgb(59, 48, 58);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.death-indicator {
+    width: 66px;
+    height: 66px;
+    margin-bottom: 22px;
+    -unity-text-align: middle-center;
+    font-size: 38px;
+    color: rgb(255, 135, 147);
+    background-color: rgb(80, 39, 48);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.death-subtitle {
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: rgb(250, 126, 141);
+    -unity-font-style: bold;
+}
+
+.death-title {
+    margin-bottom: 14px;
+    font-size: 48px;
+    color: rgb(245, 246, 248);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+.death-description {
+    margin-bottom: 30px;
+    font-size: 15px;
+    color: rgb(158, 169, 181);
+    -unity-text-align: middle-center;
+}
+
+.death-restart-button {
+    width: 100%;
+    height: 52px;
+    background-color: rgb(184, 61, 75);
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    transition-property: background-color;
+    transition-duration: 0.15s;
+}
+
+.death-restart-button:hover {
+    background-color: rgb(215, 82, 96);
+}
+
+.death-restart-button:active {
+    background-color: rgb(146, 46, 59);
+}
+
+.death-footer {
+    margin-top: 24px;
+    color: rgb(105, 119, 132);
+    font-size: 11px;
+    -unity-text-align: middle-center;
+}
+
+.game-end-success .death-indicator {
+    color: rgb(93, 212, 161);
+    background-color: rgb(31, 73, 57);
+}
+
+.game-end-success .death-subtitle {
+    color: rgb(93, 212, 161);
+}
+
+.game-end-success .death-restart-button {
+    background-color: rgb(48, 152, 108);
+}
+
+.game-end-success .death-restart-button:hover {
+    background-color: rgb(63, 184, 131);
+}
+
+.game-end-success .death-restart-button:active {
+    background-color: rgb(35, 122, 84);
+}
+
+.game-end-failure .death-indicator {
+    color: rgb(231, 163, 84);
+    background-color: rgb(77, 56, 34);
+}
+
+.game-end-failure .death-subtitle {
+    color: rgb(231, 163, 84);
+}
+
+.game-end-failure .death-restart-button {
+    background-color: rgb(173, 107, 43);
+}
+
+.game-end-failure .death-restart-button:hover {
+    background-color: rgb(204, 130, 55);
+}
+
+.game-end-failure .death-restart-button:active {
+    background-color: rgb(137, 80, 31);
+}
