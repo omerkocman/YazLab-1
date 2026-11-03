@@ -4,6 +4,9 @@ using UnityEngine;
 [SelectionBase]
 public class Switch : InteractableBase
 {
+    [Header("Gas Control")]
+    [SerializeField] private PoisonGasVent gasVent;
+
     [Header("Switch References")]
     [SerializeField] private bool isOpen;
     [SerializeField, Range(0f, 2f)] private float duration = 1f;
@@ -22,6 +25,14 @@ public class Switch : InteractableBase
     public bool IsOpen => isOpen;
     public bool IsMoving => isMoving;
 
+
+    private void Start()
+    {
+        if(gasVent != null)
+        {
+            gasVent.SetGasActive(isOpen);
+        }
+    }
 
     protected override void Awake()
     {
@@ -83,6 +94,11 @@ public class Switch : InteractableBase
     {
         isOpen = targetOpen;
         isMoving = false;
+
+        if(gasVent != null)
+        {
+            gasVent.SetGasActive(isOpen);
+        }
     }
 
     private void Rotate(Vector3 targetRotation, bool targetOpen)
