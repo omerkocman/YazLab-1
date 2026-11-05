@@ -136,5 +136,29 @@ crashlytics-build.properties
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
 
-.vs/
-UIElementsSchema/
+# Local desktop build outputs
+/[Dd]ist/
+/[Oo]ut/
+/*.exe
+/*_Data/
+/MonoBleedingEdge/
+/UnityPlayer.dll
+/GameAssembly.dll
+*.dmp
+
+# Per-user IDE and operating system files
+/.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local environment and model files
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+/.ollama/
+/.lmstudio/
+*.gguf
+*.gguf.meta
