@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5187588464525247294}
   - component: {fileID: 3615950000763843887}
   - component: {fileID: 3346779224771275770}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: MainCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,8 @@ GameObject:
   - component: {fileID: 5313389032788756301}
   - component: {fileID: 6170527902428613039}
   - component: {fileID: 2838605905393811071}
-  m_Layer: 3
+  - component: {fileID: 7947290464104492366}
+  m_Layer: 6
   m_Name: PF_Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -258,6 +259,7 @@ MonoBehaviour:
   inputHandler: {fileID: 0}
   playerMovement: {fileID: 0}
   playerLook: {fileID: 0}
+  playerHealth: {fileID: 0}
 --- !u!114 &2838605905393811071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,6 +277,19 @@ MonoBehaviour:
   raycastMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7947290464104492366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6905881645737100651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b49099418b025b044bec385fd26615bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHealth: 100
 --- !u!1 &7917645832484363518
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7403910084003592610}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: CameraPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +334,7 @@ GameObject:
   - component: {fileID: 1546201398581412254}
   - component: {fileID: 4514800121050929057}
   - component: {fileID: 2001758064100293133}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
