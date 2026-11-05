@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,35 +11,76 @@ public enum GameEndReason
 
 public class GameFlowManager : MonoBehaviour
 {
-    [Header("References")]
     [SerializeField] private PlayerHealth playerHealth;
-
-    [Header("Player Controls")]
+    [SerializeField] private PoisonGasVent gasVent;
+    [SerializeField] private DoorInteractable guardedDoor;
     [SerializeField] private MonoBehaviour[] controlsToDisable;
+    [SerializeField] private bool showPlayMenu = true;
 
+    public bool HasStarted { get; private set; }
     public bool IsGameEnded { get; private set; }
     public GameEndReason EndReason { get; private set; }
+    public string CurrentObjective => gasVent != null && gasVent.IsActive
+        ? "Activate the maintenance robot and wait for it to shut off the gas."
+        : guardedDoor != null && guardedDoor.IsOpen
+            ? "Shut off the main power switch."
+            : "Talk to the guard and request access.";
 
     public event Action<GameEndReason> GameEnded;
+    private bool dialogueOpen;
 
-    private void Awake()
+    private void Start()
     {
-        Time.timeScale = 1f;
+        if (!showPlayMenu)
+            StartMission();
+        else
+            SetPlayerInput(false, true);
     }
 
     private void OnEnable()
     {
-        if(playerHealth != null)
-        {
+        if (playerHealth != null)
             playerHealth.Died += OnPlayerDied;
-        }
     }
 
     private void OnDisable()
     {
-        if(playerHealth != null)
-        {
+        if (playerHealth != null)
             playerHealth.Died -= OnPlayerDied;
+    }
+
+    public void StartMission()
+    {
+        if (HasStarted || IsGameEnded)
+            return;
+
+        HasStarted = true;
+        SetPlayerInput(true, false);
+    }
+
+    public bool TryBeginDialogue()
+    {
+        if (!HasStarted || IsGameEnded || dialogueOpen || (gasVent != null && gasVent.IsActive))
+            return false;
+
+        dialogueOpen = true;
+        SetPlayerInput(false, false);
+        return true;
+    }
+
+    public void EndDialogue()
+    {
+        dialogueOpen = false;
+        if (HasStarted && !IsGameEnded)
+            SetPlayerInput(true, false);
+    }
+
+    public void CompleteMission()
+    {
+        if (HasStarted && !dialogueOpen && gasVent != null && !gasVent.IsActive &&
+            guardedDoor != null && guardedDoor.IsOpen)
+        {
+            EndGame(GameEndReason.MissionCompleted);
         }
     }
 
@@ -51,59 +91,34 @@ public class GameFlowManager : MonoBehaviour
 
     public void EndGame(GameEndReason reason)
     {
-        if(IsGameEnded)
-        {
+        if (IsGameEnded)
             return;
-        }
 
         IsGameEnded = true;
         EndReason = reason;
-
-        foreach(MonoBehaviour control in controlsToDisable)
-        {
-            if(control != null)
-            {
-                control.enabled = false;
-            }
-
-        }
-
-        Time.timeScale = 0f;
-
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        
+        SetPlayerInput(false, true);
         GameEnded?.Invoke(reason);
-
-        Debug.Log($"[GAME FLOW] Game ended due to: {reason}");
     }
 
     public void RestartGame()
     {
         Time.timeScale = 1f;
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
     }
 
-    [ContextMenu("Test/Mission Completed")]
-    private void TestMissionCompleted()
+    private void SetPlayerInput(bool enabled, bool pause)
     {
-        EndGame(GameEndReason.MissionCompleted);
-    }
+        if (controlsToDisable != null)
+        {
+            foreach (MonoBehaviour control in controlsToDisable)
+            {
+                if (control != null)
+                    control.enabled = enabled;
+            }
+        }
 
-    [ContextMenu("Test/Mission Failed")]
-    private void TestMissionFailed()
-    {
-        EndGame(GameEndReason.MissionFailed);
-    }
-
-    [ContextMenu("Test/Restart")]
-    private void TestRestart()
-    {
-        RestartGame();
+        Time.timeScale = pause ? 0f : 1f;
+        Cursor.lockState = enabled ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !enabled;
     }
 }

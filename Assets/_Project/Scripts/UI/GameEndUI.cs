@@ -100,26 +100,26 @@ public class GameEndUI : MonoBehaviour
 
         deathPanel.EnableInClassList("game-end-success", reason == GameEndReason.MissionCompleted);
 
-        deathPanel.EnableInClassList("game-end-failure", reason == GameEndReason.MissionFailed);
+        deathPanel.EnableInClassList("game-end-failure", reason != GameEndReason.MissionCompleted);
 
         switch(reason)
         {
             case GameEndReason.PlayerDied:
                 deathIndicator.text = "✕";
                 deathSubtitle.text = "MISSION FAILED";
-                deathTitle.text = "YOU DIED";
-                deathDescription.text = "You have succumbed to your injuries. Better luck next time.";
-                deathFooter.text = "Press 'Restart' to try again.";
+                deathTitle.text = "TOXIC EXPOSURE";
+                deathDescription.text = "You succumbed to the gas leak.";
+                deathFooter.text = "Restart to try again.";
                 restartButton.text = "RESTART MISSION";
                 
                 break;
 
             case GameEndReason.MissionCompleted:
                 deathIndicator.text = "✓";
-                deathSubtitle.text = "MISSION SUCCESS";
-                deathTitle.text = "CONGRATULATIONS!";
-                deathDescription.text = "You have successfully completed the mission. Well done!";
-                deathFooter.text = "Press 'Restart' to play again.";
+                deathSubtitle.text = "MISSION COMPLETE";
+                deathTitle.text = "SYSTEM OFFLINE";
+                deathDescription.text = "Main power is down. The facility is secure.";
+                deathFooter.text = "Restart to play again.";
                 restartButton.text = "RESTART MISSION";
 
                 break;
@@ -128,8 +128,8 @@ public class GameEndUI : MonoBehaviour
                 deathIndicator.text = "!";
                 deathSubtitle.text = "MISSION FAILED";
                 deathTitle.text = "MISSION FAILED";
-                deathDescription.text = "You have failed the mission. Better luck next time.";
-                deathFooter.text = "Press 'Restart' to try again.";
+                deathDescription.text = "The mission could not be completed.";
+                deathFooter.text = "Restart to try again.";
                 restartButton.text = "RESTART MISSION";
                 break;
         }

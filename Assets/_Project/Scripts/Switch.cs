@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 [SelectionBase]
 public class Switch : InteractableBase
@@ -14,6 +15,8 @@ public class Switch : InteractableBase
     [SerializeField] private Transform pivot;
 
     [SerializeField] private Transform interactionPoint;
+
+    [SerializeField] private UnityEvent onTurnedOff;
 
     private Vector3 openPosition;
     private Vector3 closePosition;
@@ -99,6 +102,9 @@ public class Switch : InteractableBase
         {
             gasVent.SetGasActive(isOpen);
         }
+
+        if (!isOpen)
+            onTurnedOff?.Invoke();
     }
 
     private void Rotate(Vector3 targetRotation, bool targetOpen)

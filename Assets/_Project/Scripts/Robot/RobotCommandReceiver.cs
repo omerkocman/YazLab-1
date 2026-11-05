@@ -35,6 +35,6 @@ public class RobotCommandReceiver : InteractableBase
 
     public override string GetUnavailableMessage(GameObject interactor)
     {
-        return "Robot is alredy working.";
+        return "The robot is already working.";
     }
 }

@@ -8,6 +8,7 @@ public class DoorInteractable : InteractableBase
 {
     [Header("Door References")]
     [SerializeField] private bool isOpen;
+    [SerializeField] private bool isLocked;
     [SerializeField, Range(0f, 2f)] private float duration = 1f;
     [SerializeField, Range(0f, 2f)] private float slideRange = 1.8f;
     [SerializeField] private Transform interactionPointA;
@@ -33,6 +34,9 @@ public class DoorInteractable : InteractableBase
         base.Awake();
 
         obstacle = GetComponent<NavMeshObstacle>();
+
+        if (isLocked)
+            isOpen = false;
 
         obstacle.enabled = !isOpen;
 
@@ -63,7 +67,7 @@ public class DoorInteractable : InteractableBase
 
     public override bool CanInteract(GameObject interactor)
     {
-        if(!enabled)
+        if(!enabled || isLocked)
         {
             return false;
         }
@@ -77,12 +81,31 @@ public class DoorInteractable : InteractableBase
 
     }
 
+    public bool UnlockAndOpen()
+    {
+        if (!isActiveAndEnabled || isMoving)
+            return false;
+
+        isLocked = false;
+        if (!isOpen)
+            Open();
+        return true;
+    }
+
+    public override string GetUnavailableMessage(GameObject interactor)
+    {
+        return isLocked ? "Guard authorization is required." : base.GetUnavailableMessage(interactor);
+    }
+
     public override string GetInteractionPrompt()
     {
         if(isMoving)
         {
             return "Door is moving...";
         }
+
+        if (isLocked)
+            return "Door locked";
 
         return isOpen ? "Close Door" : "Open Door";
     }

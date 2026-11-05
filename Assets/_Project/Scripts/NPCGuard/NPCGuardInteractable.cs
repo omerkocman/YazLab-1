@@ -5,13 +5,15 @@ using UnityEngine;
 public class NPCGuardInteractable : InteractableBase
 {
     [Header("NPC Guard Settings")]
-    [SerializeField] private string guardName = "Security Guard";
+    [SerializeField] private string guardName = "NPCGuard";
+
+    public string GuardName => string.IsNullOrWhiteSpace(guardName) ? "NPCGuard" : guardName.Trim();
     
     public event Action<GameObject> ConversationRequested;
 
     public override string GetInteractionPrompt()
     {
-        return $"Talk to {guardName}";
+        return $"Talk to {GuardName}";
     }
 
     public override void Interact(GameObject interactor)

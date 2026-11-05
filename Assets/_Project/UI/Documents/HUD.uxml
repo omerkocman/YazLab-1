@@ -16,8 +16,65 @@
             <ui:Label text="Open Door" name="interaction-prompt" class="interaction-prompt"/>
         </ui:VisualElement>
         <ui:Label text="Door is locked!" name="interaction-feedback" class="interaction-feedback"/>
+        <ui:VisualElement name="mission-banner" class="mission-banner hud-card" picking-mode="Ignore">
+            <ui:VisualElement class="mission-row" picking-mode="Ignore">
+                <ui:Label text="MISSION 01" class="hud-badge"/>
+                <ui:Label text="Shut down the main system" class="mission-heading"/>
+            </ui:VisualElement>
+            <ui:Label name="mission-objective" class="mission-note"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="play-overlay" class="facility-overlay">
+            <ui:VisualElement class="facility-panel menu-shell">
+                <ui:VisualElement name="play-menu" class="play-menu">
+                    <ui:Label text="SECURITY DIVISION" class="menu-kicker"/>
+                    <ui:Label text="BLACKLINE PROTOCOL" class="menu-title"/>
+                    <ui:VisualElement class="menu-divider"/>
+                    <ui:VisualElement class="menu-actions">
+                        <ui:Button name="play-button" text="Play" class="facility-button menu-button"/>
+                        <ui:Button name="settings-button" text="Settings" class="facility-button facility-secondary menu-button"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="settings-menu" class="settings-menu hud-card">
+                    <ui:Label text="LOCAL MODEL" class="hud-badge"/>
+                    <ui:Label text="LLM settings" class="facility-title"/>
+                    <ui:Label text="Server URL" class="settings-label"/>
+                    <ui:TextField name="settings-server" class="settings-field" max-length="240"/>
+                    <ui:Label text="Model name" class="settings-label"/>
+                    <ui:TextField name="settings-model" class="settings-field" max-length="160"/>
+                    <ui:Label text="Timeout (seconds)" class="settings-label"/>
+                    <ui:IntegerField name="settings-timeout" class="settings-field"/>
+                    <ui:Label name="settings-status" class="mission-note settings-status" enable-rich-text="false"/>
+                    <ui:VisualElement class="settings-actions">
+                        <ui:Button name="settings-back" text="Back" class="facility-button facility-secondary"/>
+                        <ui:Button name="settings-save" text="Save" class="facility-button settings-save"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="dialogue-overlay" class="facility-overlay dialogue-overlay">
+            <ui:VisualElement class="facility-panel dialogue-panel hud-card">
+                <ui:VisualElement class="dialogue-header">
+                    <ui:VisualElement class="dialogue-identity">
+                        <ui:Label text="SECURITY CHANNEL" class="hud-badge"/>
+                        <ui:Label name="dialogue-title" class="facility-title dialogue-title" enable-rich-text="false"/>
+                        <ui:Label name="dialogue-connection" class="connection-state" text="Connecting..."/>
+                    </ui:VisualElement>
+                    <ui:Button name="dialogue-close" text="Close" tooltip="Close (Esc)" class="facility-button facility-secondary"/>
+                </ui:VisualElement>
+                <ui:ScrollView name="dialogue-chat" class="dialogue-chat" horizontal-scroller-visibility="Hidden"/>
+                <ui:VisualElement class="dialogue-status-row">
+                    <ui:Label name="dialogue-status" class="mission-note dialogue-status" enable-rich-text="false"/>
+                    <ui:Button name="dialogue-retry" text="Retry" class="facility-button facility-secondary dialogue-retry"/>
+                </ui:VisualElement>
+                <ui:VisualElement class="dialogue-composer">
+                    <ui:TextField name="dialogue-input" class="dialogue-input" placeholder-text="Type your message in Turkish..." max-length="400"/>
+                    <ui:Button name="dialogue-send" text="Send" class="facility-button"/>
+                </ui:VisualElement>
+                <ui:Label text="Enter to send   ·   Esc to close" class="mission-note dialogue-shortcuts"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
         <ui:VisualElement name="death-overlay" class="death-overlay">
-            <ui:VisualElement name="death-panel" class="death-panel">
+            <ui:VisualElement name="death-panel" class="death-panel hud-card">
                 <ui:Label text="✕" name="death-indicator" class="death-indicator"/>
                 <ui:Label text="MISSION FAILED" name="death-subtitle" class="death-subtitle"/>
                 <ui:Label text="YOU DIED" name="death-title" class="death-title"/>
