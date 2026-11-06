@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,6 +21,8 @@ public class RobotExplorer : MonoBehaviour
     private readonly List<Vector3> visitedPoints = new List<Vector3>();
 
     private readonly List<Vector3> frontierPoints = new List<Vector3>();
+    private readonly HashSet<Vector3> localFrontiers = new HashSet<Vector3>();
+    private Vector3? selectedPoint;
 
     private void Awake()
     {
@@ -33,6 +33,7 @@ public class RobotExplorer : MonoBehaviour
     public bool TryGetNextPoint(out Vector3 nextPoint)
     {
         nextPoint = Vector3.zero;
+        selectedPoint = null;
 
         if(visitedPoints.Count == 0)
         {
@@ -40,7 +41,7 @@ public class RobotExplorer : MonoBehaviour
         }
 
         sensor.ScanEnvironment();
-
+        localFrontiers.Clear();
 
         foreach(EnvironmentRayReading ray in sensor.EnvironmentReadings)
         {
@@ -72,32 +73,35 @@ public class RobotExplorer : MonoBehaviour
 
         int bestIndex = -1;
         float bestScore = float.NegativeInfinity;
-
+        bool bestIsLocal = false;
+        float localPathLimit = explorationStep + navMeshSampleRadius + frontierMergeRadius;
+        Vector3 origin = transform.position;
+        Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
 
         for(int i = frontierPoints.Count - 1; i >= 0; i--)
         {
             Vector3 candidate = frontierPoints[i];
 
-            if (HasVisited(candidate))
+            if (!navigation.TryGetPathLength(candidate, out float travelDistance))
             {
-                frontierPoints.RemoveAt(i);
+                localFrontiers.Remove(candidate);
                 continue;
             }
 
-            if (!navigation.CanReach(candidate))
+            bool isLocal = localFrontiers.Contains(candidate) && travelDistance <= localPathLimit;
+            if (!isLocal)
             {
-                continue;
+                localFrontiers.Remove(candidate);
             }
 
-            float novelty = GetDistanceFromVisited(candidate);
-            float travelDistance = Vector3.Distance(transform.position, candidate);
+            float progress = isLocal ? Vector3.Dot(candidate - origin, forward) : GetDistanceFromVisited(candidate);
+            float score = progress - travelDistance * 0.15f;
 
-            float score = novelty - travelDistance * 0.15f;
-
-            if (score > bestScore)
+            if (bestIndex == -1 || (isLocal && !bestIsLocal) || (isLocal == bestIsLocal && score > bestScore))
             {
                 bestScore = score;
                 bestIndex = i;
+                bestIsLocal = isLocal;
             }
 
         }
@@ -111,6 +115,7 @@ public class RobotExplorer : MonoBehaviour
         }
 
         nextPoint = frontierPoints[bestIndex];
+        selectedPoint = nextPoint;
         frontierPoints.RemoveAt(bestIndex);
 
         return true;
@@ -163,12 +168,40 @@ public class RobotExplorer : MonoBehaviour
 
     public void MarkVisited(Vector3 position)
     {
+        selectedPoint = null;
         if(!HasVisited(position))
         {
             visitedPoints.Add(position);
         }
 
         frontierPoints.RemoveAll(point => Vector3.Distance(point, position) <= visitedRadius);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Color previousColor = Gizmos.color;
+        Vector3 markerOffset = Vector3.up * 0.2f;
+
+        Gizmos.color = new Color(0.25f, 0.65f, 1f);
+        foreach (Vector3 point in visitedPoints)
+        {
+            Gizmos.DrawSphere(point + markerOffset, 0.12f);
+            Gizmos.DrawWireSphere(point, visitedRadius);
+        }
+
+        foreach (Vector3 point in frontierPoints)
+        {
+            Gizmos.color = localFrontiers.Contains(point) ? Color.green : Color.yellow;
+            Gizmos.DrawSphere(point + markerOffset, 0.16f);
+        }
+
+        if (selectedPoint.HasValue)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawSphere(selectedPoint.Value + markerOffset, 0.25f);
+        }
+
+        Gizmos.color = previousColor;
     }
 
     private void AddFrontier(Vector3 point)
@@ -182,11 +215,13 @@ public class RobotExplorer : MonoBehaviour
         {
             if(Vector3.Distance(existing, point) <= frontierMergeRadius)
             {
+                localFrontiers.Add(existing);
                 return;
             }
         }
 
         frontierPoints.Add(point);
+        localFrontiers.Add(point);
 
     }
 

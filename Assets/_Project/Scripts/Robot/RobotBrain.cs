@@ -27,6 +27,8 @@ public enum RobotTaskType
 
 public class RobotBrain : MonoBehaviour
 {
+    private const float SwitchScanInterval = 0.3f;
+
     [Header("Target Interaction")]
     [SerializeField, Min(0.1f)] private float interactionDistance = 2f;
     [SerializeField, Min(1f)] private float targetMoveTimeout = 20f;
@@ -48,6 +50,7 @@ public class RobotBrain : MonoBehaviour
     private RobotDetectable targetDetectable;
     private bool switchInteractionStarted;
     private float targetMoveStartedAt;
+    private float nextSwitchScanAt;
 
     // Door
     private DoorInteractable targetDoor;
@@ -113,10 +116,8 @@ public class RobotBrain : MonoBehaviour
         }
     }
 
-    private void HandleSearching()
+    private bool TryApproachVisibleSwitch()
     {
-        sensor.Scan();
-
         foreach(RobotDetectable detected in sensor.VisibleObjects)
         {
             if(CurrentTask != RobotTaskType.DisableGas || detected.Type != RobotObjectType.Switch)
@@ -133,8 +134,9 @@ public class RobotBrain : MonoBehaviour
 
             if(!foundSwitch.IsOpen)
             {
+                navigation.Stop();
                 SetState(RobotState.Completed);
-                return;
+                return true;
             }
 
             targetSwitch = foundSwitch;
@@ -142,25 +144,32 @@ public class RobotBrain : MonoBehaviour
 
             if(Vector3.Distance(transform.position, targetSwitch.transform.position) <= interactionDistance)
             {
+                navigation.Stop();
                 SetState(RobotState.Interacting);
-                return;
+                return true;
             }
 
             if(navigation.TryMoveNear(targetSwitch.InteractionPosition))
             {
                 targetMoveStartedAt = Time.time;
                 SetState(RobotState.MovingToTarget);
-                return;
+                return true;
             }
 
-            else
-            {
-                Debug.Log("[ROBOT BRAIN] Switch detected but no reachable approach point!");
-            }
-
+            Debug.Log("[ROBOT BRAIN] Switch detected but no reachable approach point!");
             targetSwitch = null;
             targetDetectable = null;
+        }
 
+        return false;
+    }
+
+    private void HandleSearching()
+    {
+        sensor.Scan();
+        if (TryApproachVisibleSwitch())
+        {
+            return;
         }
 
         foreach(RobotDetectable detected in sensor.VisibleObjects)
@@ -222,6 +231,7 @@ public class RobotBrain : MonoBehaviour
         }
 
         Debug.Log($"[ROBOT BRAIN] Exploring point: {point}");
+        nextSwitchScanAt = Time.time + SwitchScanInterval;
         SetState(RobotState.MovingToExplorePoint);
     }
 
@@ -229,6 +239,16 @@ public class RobotBrain : MonoBehaviour
     {
         if(!navigation.HasReachedDestination())
         {
+            if (Time.time >= nextSwitchScanAt)
+            {
+                nextSwitchScanAt = Time.time + SwitchScanInterval;
+                sensor.Scan();
+                if (TryApproachVisibleSwitch())
+                {
+                    explorer.MarkVisited(transform.position);
+                }
+            }
+
             return;
         }
 
