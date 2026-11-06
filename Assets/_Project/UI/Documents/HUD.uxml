@@ -27,11 +27,12 @@
             <ui:VisualElement class="facility-panel menu-shell">
                 <ui:VisualElement name="play-menu" class="play-menu">
                     <ui:Label text="SECURITY DIVISION" class="menu-kicker"/>
-                    <ui:Label text="BLACKLINE PROTOCOL" class="menu-title"/>
+                    <ui:Label text="BLACKLINE PROTOCOL" name="menu-title" class="menu-title"/>
                     <ui:VisualElement class="menu-divider"/>
                     <ui:VisualElement class="menu-actions">
                         <ui:Button name="play-button" text="Play" class="facility-button menu-button"/>
                         <ui:Button name="settings-button" text="Settings" class="facility-button facility-secondary menu-button"/>
+                        <ui:Button name="quit-button" text="Quit" class="facility-button facility-secondary menu-button"/>
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="settings-menu" class="settings-menu hud-card">
@@ -80,6 +81,7 @@
                 <ui:Label text="YOU DIED" name="death-title" class="death-title"/>
                 <ui:Label text="Your vital signs have reached zero." name="death-description" class="death-description"/>
                 <ui:Button text="RESTART MISSION" name="death-restart-button" class="death-restart-button"/>
+                <ui:Button text="Quit" name="death-quit-button" class="facility-button facility-secondary"/>
                 <ui:Label text="SYSTEM STATUS: TERMINATED" name="death-footer" class="death-footer"/>
             </ui:VisualElement>
         </ui:VisualElement>

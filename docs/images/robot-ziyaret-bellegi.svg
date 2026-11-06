@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 340" role="img" aria-labelledby="title">
+<title id="title">Üç keşif adımında ziyaret belleğinin oluşması</title>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#dda2ff"/></marker></defs>
+<rect width="960" height="340" rx="18" fill="#101923"/>
+<g font-family="Segoe UI, Arial, sans-serif" fill="#eaf1f6">
+<text x="28" y="42" font-size="24" font-weight="700">Keşif belleği · Üç adımda ziyaret izi</text>
+<rect x="25" y="66" width="290" height="205" rx="12" fill="#172632"/>
+<rect x="335" y="66" width="290" height="205" rx="12" fill="#172632"/>
+<rect x="645" y="66" width="290" height="205" rx="12" fill="#172632"/>
+<text x="44" y="99" font-size="17" font-weight="700">1 · Başlangıcı kaydet</text>
+<text x="354" y="99" font-size="17" font-weight="700">2 · Varınca durağı ekle</text>
+<text x="664" y="99" font-size="17" font-weight="700">3 · Yeni yöne ilerle</text>
+<g fill="#64baff" fill-opacity=".10" stroke="#64baff" stroke-dasharray="4 4">
+<circle cx="81" cy="170" r="30"/><circle cx="391" cy="170" r="30"/><circle cx="482" cy="170" r="30"/>
+<circle cx="701" cy="170" r="30"/><circle cx="792" cy="170" r="30"/><circle cx="871" cy="170" r="30"/>
+</g>
+<path d="M81 170H190 M482 170H575 M871 166V125" fill="none" stroke="#dda2ff" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M391 170H482 M701 170H871" stroke="#64baff" stroke-opacity=".5" stroke-dasharray="5 5" stroke-width="2"/>
+<g fill="#64baff"><circle cx="81" cy="170" r="7"/><circle cx="391" cy="170" r="7"/><circle cx="482" cy="170" r="7"/><circle cx="701" cy="170" r="7"/><circle cx="792" cy="170" r="7"/><circle cx="871" cy="170" r="7"/></g>
+<g fill="#dda2ff"><circle cx="195" cy="170" r="7"/><circle cx="580" cy="170" r="7"/><circle cx="871" cy="121" r="7"/></g>
+<g fill="#67e0ac"><circle cx="252" cy="145" r="5"/><circle cx="543" cy="142" r="5"/><circle cx="906" cy="125" r="5"/></g>
+<g fill="#abc2cc" font-size="13"><text x="44" y="237">İlk konum belleğe alınır.</text><text x="354" y="237">Yakındaki adaylar temizlenir.</text><text x="664" y="237">Kalan adaylardan hedef seçilir.</text></g>
+<text x="28" y="305" font-size="14" fill="#64baff">● Ziyaret edilen durak</text>
+<text x="231" y="305" font-size="14" fill="#abc2cc">◌ visitedRadius</text>
+<text x="388" y="305" font-size="14" fill="#dda2ff">● Seçilen hedef</text>
+<text x="556" y="305" font-size="14" fill="#67e0ac">● Yerel aday</text>
+<text x="685" y="305" font-size="14" fill="#abc2cc">Kesik hat: şematik hareket</text>
+</g></svg>

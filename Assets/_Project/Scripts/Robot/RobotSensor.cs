@@ -31,7 +31,11 @@ public class RobotSensor : MonoBehaviour
     public IReadOnlyList<RobotDetectable> VisibleObjects => visibleObjects;
 
     [ContextMenu("Test Scan")]
-    public void Scan()
+    private void TestScan() => Scan(8f);
+
+    public void Scan() => Scan(0f);
+
+    private void Scan(float debugDuration)
     {
         visibleObjects.Clear();
 
@@ -88,7 +92,7 @@ public class RobotSensor : MonoBehaviour
                     sensorOrigin.position,
                     hit.point,
                     isTarget ? Color.green : Color.red,
-                    0f
+                    debugDuration
                 );
 
                 //Debug.Log($"[ROBOT SENSOR] Raycast hit: {hit.collider.name}");
@@ -109,7 +113,11 @@ public class RobotSensor : MonoBehaviour
     }
 
     [ContextMenu("Test Environment Scan")]
-    public void ScanEnvironment()
+    private void TestEnvironmentScan() => ScanEnvironment(8f);
+
+    public void ScanEnvironment() => ScanEnvironment(0.1f);
+
+    private void ScanEnvironment(float debugDuration)
     {
         environmentReadings.Clear();
 
@@ -160,7 +168,7 @@ public class RobotSensor : MonoBehaviour
                 hitCount++;
             }
 
-            Debug.DrawLine(origin, endPoint, hasHit ? Color.red : Color.green, 0.1f);
+            Debug.DrawLine(origin, endPoint, hasHit ? Color.red : Color.green, debugDuration);
         }
 
         Debug.Log($"[ROBOT SENSOR] Environment: {rayCount} rays, {hitCount} hits.");

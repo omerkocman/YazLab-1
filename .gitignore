@@ -142,8 +142,11 @@ crashlytics-build.properties
 /*.exe
 /*_Data/
 /MonoBleedingEdge/
+/D3D12/
 /UnityPlayer.dll
 /GameAssembly.dll
+/dstorage.dll
+/dstoragecore.dll
 *.dmp
 
 # Per-user IDE and operating system files

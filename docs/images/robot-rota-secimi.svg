@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 352" role="img" aria-labelledby="title">
+<title id="title">NavMesh rota seçimi. Duvar arkasındaki yakın aday ve koridor boyunca erişilen aday</title>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#dda2ff"/></marker></defs>
+<rect width="960" height="352" rx="18" fill="#101923"/>
+<g font-family="Segoe UI, Arial, sans-serif" fill="#eaf1f6">
+<text x="30" y="42" font-size="24" font-weight="700">NavMesh · Robot hedefe nasıl yol buluyor?</text>
+<rect x="30" y="67" width="543" height="235" rx="12" fill="#244452"/>
+<rect x="262" y="67" width="33" height="145" fill="#97a9b5"/>
+<text x="279" y="125" font-size="13" fill="#101923" text-anchor="middle" transform="rotate(-90 279 125)">DUVAR</text>
+<path d="M120 140 H347" stroke="#ff858e" stroke-dasharray="6 6" stroke-width="2"/>
+<path d="M120 140 L236 239 L316 239 L347 140" fill="none" stroke="#dda2ff" stroke-width="4" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M120 140 L132 251" stroke="#67e0ac" stroke-width="4" stroke-linecap="round"/>
+<circle cx="120" cy="140" r="12" fill="#64baff"/>
+<circle cx="132" cy="251" r="8" fill="#67e0ac"/>
+<circle cx="347" cy="140" r="8" fill="#dda2ff"/>
+<text x="73" y="121" font-size="15">Robot</text><text x="151" y="259" font-size="15">A · açık yön</text><text x="365" y="145" font-size="15">B · duvar arkası</text>
+<text x="30" y="328" font-size="13" fill="#abc2cc">Şematik üstten görünüm. Yürünebilir alan mavi-yeşil renkte.</text>
+<g transform="translate(601 86)">
+<text x="0" y="0" font-size="16" font-weight="700">1 · Adayı zemine oturt</text>
+<text x="0" y="23" font-size="14" fill="#abc2cc">NavMesh.SamplePosition</text>
+<text x="0" y="67" font-size="16" font-weight="700">2 · Tam rota var mı?</text>
+<text x="0" y="90" font-size="14" fill="#abc2cc">CalculatePath → PathComplete</text>
+<text x="0" y="134" font-size="16" font-weight="700">3 · Yol köşelerini topla</text>
+<text x="0" y="157" font-size="14" fill="#abc2cc">TryGetPathLength → gerçek mesafe</text>
+<text x="0" y="201" font-size="16" font-weight="700">4 · Puanla ve yürüt</text>
+<text x="0" y="224" font-size="14" fill="#abc2cc">TryGetNextPoint → TryMoveTo</text>
+</g></g></svg>

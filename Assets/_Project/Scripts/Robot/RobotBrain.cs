@@ -44,6 +44,7 @@ public class RobotBrain : MonoBehaviour
     private RobotNavigation navigation;
     private RobotSensor sensor;
     private RobotExplorer explorer;
+    private GameFlowManager gameFlow;
 
     // Switch
     private Switch targetSwitch;
@@ -127,7 +128,7 @@ public class RobotBrain : MonoBehaviour
 
             Switch foundSwitch = detected.GetComponent<Switch>();
 
-            if(foundSwitch == null)
+            if(foundSwitch == null || (gameFlow != null && !gameFlow.CanRobotTargetSwitch(foundSwitch)))
             {
                 continue;
             }
@@ -181,7 +182,7 @@ public class RobotBrain : MonoBehaviour
 
             DoorInteractable door = detected.GetComponent<DoorInteractable>();
 
-            if(door == null || door.IsOpen || door.IsMoving)
+            if(door == null || door.IsOpen || !door.CanInteract(gameObject))
             {
                 continue;
             }
@@ -486,6 +487,7 @@ public class RobotBrain : MonoBehaviour
             return false;
         }
 
+        gameFlow = FindAnyObjectByType<GameFlowManager>();
         CurrentTask = task;
         IsActivated = true;
 

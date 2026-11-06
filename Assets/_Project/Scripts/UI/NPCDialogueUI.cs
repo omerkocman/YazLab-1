@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(PanelRenderer))]
@@ -61,13 +60,13 @@ public class NPCDialogueUI : MonoBehaviour
         dialogue.EndConversation();
     }
 
-    private void Update()
+    public bool TryCloseConversation()
     {
-        if (dialogue != null && dialogue.IsConversationActive &&
-            Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            Close();
-        }
+        if (dialogue == null || !dialogue.IsConversationActive)
+            return false;
+
+        Close();
+        return true;
     }
 
     private void OnUIReload(PanelRenderer renderer, VisualElement root, int version)

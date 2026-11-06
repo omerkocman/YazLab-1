@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 300" role="img" aria-labelledby="title">
+<title id="title">Görev sonu arayüzünün USS temelli gösterimi</title>
+<rect width="920" height="300" rx="16" fill="#101923"/>
+<g font-family="Segoe UI, Arial, sans-serif" text-anchor="middle">
+<rect x="12" y="12" width="442" height="276" rx="14" fill="#151b23" stroke="#77562b"/>
+<rect x="466" y="12" width="442" height="276" rx="14" fill="#151b23" stroke="#376452"/>
+<rect x="209" y="26" width="48" height="48" rx="9" fill="#4d3822"/>
+<rect x="663" y="26" width="48" height="48" rx="9" fill="#1f4939"/>
+<text x="233" y="60" font-size="29" fill="#e7a354">✕</text>
+<text x="687" y="60" font-size="29" fill="#5dd4a1">✓</text>
+<text x="233" y="99" font-size="13" font-weight="700" fill="#e7a354">MISSION FAILED</text>
+<text x="687" y="99" font-size="13" font-weight="700" fill="#5dd4a1">MISSION COMPLETE</text>
+<text x="233" y="135" font-size="27" font-weight="700" fill="#f5f6f8">TOXIC EXPOSURE</text>
+<text x="687" y="135" font-size="27" font-weight="700" fill="#f5f6f8">SYSTEM OFFLINE</text>
+<text x="233" y="161" font-size="14" fill="#9ea9b5">You succumbed to the gas leak.</text>
+<text x="687" y="161" font-size="14" fill="#9ea9b5">Main power is down. The facility is secure.</text>
+<rect x="38" y="181" width="390" height="43" rx="8" fill="#ad6b2b"/>
+<rect x="492" y="181" width="390" height="43" rx="8" fill="#30986c"/>
+<text x="233" y="208" font-size="14" font-weight="700" fill="#fff">RESTART MISSION</text>
+<text x="687" y="208" font-size="14" font-weight="700" fill="#fff">RESTART MISSION</text>
+<rect x="191" y="236" width="84" height="34" rx="8" fill="#172430" stroke="#40535f"/>
+<rect x="645" y="236" width="84" height="34" rx="8" fill="#172430" stroke="#40535f"/>
+<text x="233" y="258" font-size="14" fill="#e0eaf2">Quit</text>
+<text x="687" y="258" font-size="14" fill="#e0eaf2">Quit</text>
+</g></svg>

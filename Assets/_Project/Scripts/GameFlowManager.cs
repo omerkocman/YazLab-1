@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,11 +14,14 @@ public class GameFlowManager : MonoBehaviour
 {
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private PoisonGasVent gasVent;
+    [SerializeField] private Switch[] gasSwitchCandidates;
     [SerializeField] private DoorInteractable guardedDoor;
+    [SerializeField] private Switch finalSwitch;
     [SerializeField] private MonoBehaviour[] controlsToDisable;
     [SerializeField] private bool showPlayMenu = true;
 
     public bool HasStarted { get; private set; }
+    public bool IsPaused { get; private set; }
     public bool IsGameEnded { get; private set; }
     public GameEndReason EndReason { get; private set; }
     public string CurrentObjective => gasVent != null && gasVent.IsActive
@@ -28,6 +32,8 @@ public class GameFlowManager : MonoBehaviour
 
     public event Action<GameEndReason> GameEnded;
     private bool dialogueOpen;
+    private bool finalSwitchWasOpen;
+    private Switch activeGasSwitch;
 
     private void Start()
     {
@@ -39,6 +45,7 @@ public class GameFlowManager : MonoBehaviour
 
     private void OnEnable()
     {
+        finalSwitchWasOpen = finalSwitch != null && finalSwitch.IsOpen;
         if (playerHealth != null)
             playerHealth.Died += OnPlayerDied;
     }
@@ -54,13 +61,51 @@ public class GameFlowManager : MonoBehaviour
         if (HasStarted || IsGameEnded)
             return;
 
+        SelectGasSwitch();
         HasStarted = true;
         SetPlayerInput(true, false);
     }
 
+    public bool CanRobotTargetSwitch(Switch candidate)
+    {
+        return candidate != finalSwitch && (activeGasSwitch == null || candidate == activeGasSwitch);
+    }
+
+    private void SelectGasSwitch()
+    {
+        if (gasSwitchCandidates == null || gasSwitchCandidates.Length == 0)
+            return;
+
+        if (gasVent == null)
+        {
+            Debug.LogWarning("[GAME FLOW] Assign a Gas Vent to use Gas Switch Candidates.", this);
+            return;
+        }
+
+        var candidates = new List<Switch>();
+        foreach (Switch candidate in gasSwitchCandidates)
+        {
+            if (candidate != null && candidate != finalSwitch && !candidates.Contains(candidate))
+                candidates.Add(candidate);
+        }
+
+        if (candidates.Count == 0)
+            return;
+
+        activeGasSwitch = candidates[UnityEngine.Random.Range(0, candidates.Count)];
+        foreach (Switch candidate in candidates)
+        {
+            if (candidate != activeGasSwitch)
+                candidate.gameObject.SetActive(false);
+        }
+
+        activeGasSwitch.gameObject.SetActive(true);
+        activeGasSwitch.ConfigureGasControl(gasVent);
+    }
+
     public bool TryBeginDialogue()
     {
-        if (!HasStarted || IsGameEnded || dialogueOpen || (gasVent != null && gasVent.IsActive))
+        if (!HasStarted || IsGameEnded || IsPaused || dialogueOpen || (gasVent != null && gasVent.IsActive))
             return false;
 
         dialogueOpen = true;
@@ -71,17 +116,38 @@ public class GameFlowManager : MonoBehaviour
     public void EndDialogue()
     {
         dialogueOpen = false;
-        if (HasStarted && !IsGameEnded)
+        if (HasStarted && !IsGameEnded && !IsPaused)
             SetPlayerInput(true, false);
+    }
+
+    public void TogglePause()
+    {
+        if (!HasStarted || IsGameEnded || dialogueOpen)
+            return;
+
+        IsPaused = !IsPaused;
+        SetPlayerInput(!IsPaused, IsPaused);
     }
 
     public void CompleteMission()
     {
-        if (HasStarted && !dialogueOpen && gasVent != null && !gasVent.IsActive &&
-            guardedDoor != null && guardedDoor.IsOpen)
+        if (HasStarted && finalSwitch != null && !finalSwitch.IsOpen && !finalSwitch.IsMoving)
         {
             EndGame(GameEndReason.MissionCompleted);
         }
+    }
+
+    private void Update()
+    {
+        if (finalSwitch == null || IsGameEnded)
+            return;
+
+        // Switch updates IsOpen once its animation finishes.
+        bool isOpen = finalSwitch.IsOpen;
+        bool justTurnedOff = finalSwitchWasOpen && !isOpen;
+        finalSwitchWasOpen = isOpen;
+        if (justTurnedOff)
+            CompleteMission();
     }
 
     private void OnPlayerDied()
@@ -95,6 +161,7 @@ public class GameFlowManager : MonoBehaviour
             return;
 
         IsGameEnded = true;
+        IsPaused = false;
         EndReason = reason;
         SetPlayerInput(false, true);
         GameEnded?.Invoke(reason);

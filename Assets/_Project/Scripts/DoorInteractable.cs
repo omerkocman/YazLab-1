@@ -8,7 +8,8 @@ public class DoorInteractable : InteractableBase
 {
     [Header("Door References")]
     [SerializeField] private bool isOpen;
-    [SerializeField] private bool isLocked;
+    [SerializeField, HideInInspector] private bool isLocked;
+    [SerializeField] private Lock doorLock;
     [SerializeField, Range(0f, 2f)] private float duration = 1f;
     [SerializeField, Range(0f, 2f)] private float slideRange = 1.8f;
     [SerializeField] private Transform interactionPointA;
@@ -17,6 +18,7 @@ public class DoorInteractable : InteractableBase
     private bool isMoving;
 
     public bool IsOpen => isOpen;
+    public bool IsLocked => doorLock != null ? doorLock.IsLocked : isLocked;
     public bool IsMoving => isMoving;
 
     public Transform InteractionPositionA => interactionPointA != null ? interactionPointA : transform;
@@ -33,9 +35,12 @@ public class DoorInteractable : InteractableBase
     {
         base.Awake();
 
+        if (doorLock == null)
+            doorLock = GetComponent<Lock>();
+
         obstacle = GetComponent<NavMeshObstacle>();
 
-        if (isLocked)
+        if (IsLocked)
             isOpen = false;
 
         obstacle.enabled = !isOpen;
@@ -67,7 +72,7 @@ public class DoorInteractable : InteractableBase
 
     public override bool CanInteract(GameObject interactor)
     {
-        if(!enabled || isLocked)
+        if(!enabled || IsLocked)
         {
             return false;
         }
@@ -87,6 +92,8 @@ public class DoorInteractable : InteractableBase
             return false;
 
         isLocked = false;
+        if (doorLock != null)
+            doorLock.Unlock();
         if (!isOpen)
             Open();
         return true;
@@ -94,7 +101,7 @@ public class DoorInteractable : InteractableBase
 
     public override string GetUnavailableMessage(GameObject interactor)
     {
-        return isLocked ? "Guard authorization is required." : base.GetUnavailableMessage(interactor);
+        return IsLocked ? "Guard authorization is required." : base.GetUnavailableMessage(interactor);
     }
 
     public override string GetInteractionPrompt()
@@ -104,7 +111,7 @@ public class DoorInteractable : InteractableBase
             return "Door is moving...";
         }
 
-        if (isLocked)
+        if (IsLocked)
             return "Door locked";
 
         return isOpen ? "Close Door" : "Open Door";

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 420" role="img" aria-labelledby="title desc">
+  <title id="title">Robotun iki farklı taraması</title>
+  <desc id="desc">Sol panel görüş hattı denetimini, sağ panel çevre ışınlarından NavMesh keşif adayı üretilmesini gösterir.</desc>
+  <rect width="1080" height="420" rx="20" fill="#101923"/>
+  <g font-family="system-ui,sans-serif" fill="#eaf4fa">
+    <text x="36" y="46" font-size="25" font-weight="700">Robot ne görüyor, nereye gidiyor?</text>
+    <rect x="32" y="68" width="493" height="320" rx="13" fill="#172632"/>
+    <rect x="555" y="68" width="493" height="320" rx="13" fill="#172632"/>
+    <text x="54" y="104" font-size="19" font-weight="700">Scan() · Görüş hattı</text>
+    <text x="577" y="104" font-size="19" font-weight="700">ScanEnvironment() · Açık yönler</text>
+    <circle cx="160" cy="240" r="121" fill="none" stroke="#607b90" stroke-width="1.5" stroke-dasharray="5 6"/>
+    <path d="M160 240 L261 175 A120 120 0 0 1 261 305 Z" fill="#22465a"/>
+    <path d="M160 240 L251 202" stroke="#5ce7a5" stroke-width="4"/>
+    <path d="M160 240 L212 262" stroke="#ff838a" stroke-width="4"/>
+    <path d="M222 266 L252 279" stroke="#8fa6b6" stroke-width="2" stroke-dasharray="5 4"/>
+    <rect x="211" y="249" width="11" height="43" rx="2" fill="#a6b8c6"/>
+    <rect x="246" y="194" width="16" height="16" rx="3" fill="#5ce7a5"/>
+    <rect x="246" y="272" width="16" height="16" rx="3" fill="none" stroke="#b8cbd8" stroke-width="2"/>
+    <circle cx="160" cy="240" r="12" fill="#62baff"/>
+    <path d="M161 235 L171 240 L161 245 Z" fill="#102333"/>
+    <text x="273" y="200" font-size="14">Şalter görülür</text>
+    <text x="273" y="279" font-size="14">Şalter duvar arkasında</text>
+    <text x="53" y="366" fill="#b5c9d7" font-size="14">Yakınlık → Görüş açısı → İlk collider isabeti</text>
+    <path d="M606 158 H750 V202 H986 V291 H750 V323 H606 Z" fill="#204452"/>
+    <path d="M606 158 H750 V202 H986 M606 323 H750 V291 H986" fill="none" stroke="#9eafbc" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M691 248 L606 248 M691 248 L651 158 M691 248 L750 198 M691 248 L633 323 M691 248 L759 291" fill="none" stroke="#ff838a" stroke-width="2.5"/>
+    <path d="M691 248 L953 238 M691 248 L949 274" fill="none" stroke="#5ce7a5" stroke-width="3"/>
+    <path d="M691 248 L781 244 L849 244" fill="none" stroke="#dda2ff" stroke-width="4" stroke-dasharray="6 5"/>
+    <circle cx="691" cy="248" r="12" fill="#62baff"/>
+    <circle cx="849" cy="244" r="8" fill="#dda2ff"/>
+    <path d="M849 233 V173 H884" fill="none" stroke="#dda2ff" stroke-width="1.5"/>
+    <text x="888" y="178" font-size="14">Seçilen aday</text>
+    <text x="577" y="366" fill="#b5c9d7" font-size="14">Ray mesafesi → NavMesh adayı → Rota seçimi</text>
+  </g>
+</svg>

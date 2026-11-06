@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6062749920348734551}
   - component: {fileID: 1332052748100530034}
   - component: {fileID: 8225537964345193669}
+  - component: {fileID: 3648199475335115741}
   m_Layer: 0
   m_Name: PF_NPCGuard
   m_TagString: Untagged
@@ -62,9 +63,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogueController
   npcGuard: {fileID: 1332052748100530034}
-  llmService: {fileID: 0}
-  systemPrompt: You are a security guard protecting a locked exit door inside an industrial facility. The player wants to convince you to open the door. You are cautious, professional, and responsible for safety. Do not open the door just because the player asks. You may open it if the player provides a convincing emergency reason or credible authorization. Never pretend to have verified information you cannot verify. Respond in Turkish. Return JSON containing response (string) and openDoor (boolean).
-  testMessage: "Merhaba, bu kap\u0131dan ge\xE7mem gerekiyor."
+  llmService: {fileID: 3648199475335115741}
+  prompt: {fileID: 4900000, guid: 099545dc9711bd843baf0f98c9830e0f, type: 3}
+  gameFlow: {fileID: 0}
+  gasVent: {fileID: 0}
+  guardedDoor: {fileID: 0}
+--- !u!114 &3648199475335115741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5231691924940164612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca3862124090faa4a9670746a4f8db1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LLMService
+  serverURL: http://localhost:1235/v1
+  modelName: qwen3-4b-instruct-2507
+  timeoutSeconds: 30
 --- !u!1 &7053399501986934659
 GameObject:
   m_ObjectHideFlags: 0

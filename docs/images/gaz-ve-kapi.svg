@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 390" role="img" aria-labelledby="title">
+<title id="title">Gaz bölgesi ve kapı yaklaşma noktaları</title>
+<defs><radialGradient id="fog"><stop stop-color="#a7e76b" stop-opacity=".7"/><stop offset="1" stop-color="#88be5f" stop-opacity="0"/></radialGradient></defs>
+<rect width="960" height="390" rx="17" fill="#101923"/>
+<g font-family="Segoe UI, Arial, sans-serif" fill="#eaf1f6">
+<rect x="18" y="18" width="452" height="354" rx="12" fill="#172632"/>
+<rect x="490" y="18" width="452" height="354" rx="12" fill="#172632"/>
+<text x="40" y="54" font-size="22" font-weight="700">Gaz engeli · Yan görünüm</text>
+<text x="512" y="54" font-size="22" font-weight="700">Kapı · Üstten görünüm</text>
+<text x="40" y="80" font-size="14" fill="#abc2cc">Parçacık sistemi + hasar tetikleyicisi</text>
+<text x="512" y="80" font-size="14" fill="#abc2cc">İki ayrı NavMesh yaklaşma noktası</text>
+<ellipse cx="232" cy="207" rx="176" ry="121" fill="url(#fog)"/>
+<rect x="80" y="113" width="298" height="166" fill="none" stroke="#7ed0d5" stroke-width="2" stroke-dasharray="8 6"/>
+<text x="94" y="137" fill="#a8e9e9" font-size="15">BoxCollider · Trigger</text>
+<text x="223" y="207" text-anchor="middle" font-size="16">Gaz parçacıkları</text>
+<path d="M49 279 H430 L404 306 H77 Z" fill="#324756"/>
+<rect x="168" y="270" width="134" height="13" rx="3" fill="#879aa6"/>
+<path d="M180 271 V282 M199 271 V282 M218 271 V282 M237 271 V282 M256 271 V282 M275 271 V282 M294 271 V282" stroke="#324756" stroke-width="4"/>
+<text x="40" y="338" fill="#abc2cc" font-size="14">SetGasActive(false) → efekt ve hasar kapanır</text>
+<rect x="516" y="104" width="400" height="92" rx="7" fill="#244452"/>
+<rect x="516" y="211" width="400" height="92" rx="7" fill="#244452"/>
+<path d="M516 202 H650 M782 202 H916" stroke="#9caebb" stroke-width="14"/>
+<rect x="650" y="191" width="132" height="23" rx="5" fill="#daa256"/>
+<text x="716" y="207" fill="#172632" text-anchor="middle" font-size="14" font-weight="700">Kapı / Engel</text>
+<circle cx="716" cy="147" r="11" fill="#67e0ac"/>
+<circle cx="716" cy="258" r="11" fill="#67e0ac"/>
+<path d="M716 159 V181 M716 225 V246" stroke="#67e0ac" stroke-dasharray="4 5" stroke-width="2"/>
+<text x="736" y="152" font-size="15">Point A</text>
+<text x="736" y="263" font-size="15">Point B</text>
+<text x="534" y="155" font-size="15" fill="#abc2cc">Oda 1</text>
+<text x="534" y="264" font-size="15" fill="#abc2cc">Oda 2</text>
+<text x="512" y="338" fill="#abc2cc" font-size="14">Kapı açılınca NavMeshObstacle devre dışı kalır</text>
+</g></svg>

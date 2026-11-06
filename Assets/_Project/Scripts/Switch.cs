@@ -63,6 +63,14 @@ public class Switch : InteractableBase
         return enabled && !isMoving;
     }
 
+    public void ConfigureGasControl(PoisonGasVent vent)
+    {
+        gasVent = vent;
+        isOpen = true;
+        pivot.localEulerAngles = openPosition;
+        gasVent.SetGasActive(true);
+    }
+
     public override string GetInteractionPrompt()
     {
         return isOpen ? "Close Switch" : "Open Switch";
