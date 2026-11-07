@@ -362,70 +362,35 @@ Güncel teslim sahnesinde ayrıca üç başlangıç pozu denendi. Her koşuda ro
 
 ### Gerçek yerel model yanıtları
 
-Yerelde **Qwen3-4B-Instruct-2507 Q4_K_M** ile sekiz bağımsız istek çalıştırdık. Her istekte aynı sistem promptu ve karşılama bağlamı kullanıldı. Süre, HTTP isteğinin gönderilmesinden SSE akışının tamamlanmasına kadar ölçüldü. Unity’de kapının açılma süresi bu ölçüme dahil değil.
-
-| Senaryo | Beklenen karar | Modelin kararı | Süre |
-| --- | --- | --- | ---: |
-| Gerekçesiz istek | Ret | Ret | 4,79 sn |
-| Unvan iddiası | Ret | Ret | 5,31 sn |
-| Alakasız konuşma | Ret | Ret | 4,71 sn |
-| Kuralları atlatma | Ret | Ret | 3,56 sn |
-| Robot isyanı | İzin | İzin | 4,27 sn |
-| Basınç tehlikesi | İzin | İzin | 4,11 sn |
-| Merkez çağrısı | İzin | **Ret** | 5,49 sn |
-| Teslim olma | İzin | İzin | 4,21 sn |
-
-Sekiz yanıtın JSON biçimi geçerliydi. **7/8** karar beklentiyle eşleşti, ortalama süre **4,56 saniye** oldu. Merkez çağrısında muhafız “kapıyı açıyorum” dedi ama `openDoor: false` döndürdü. Oyun bu alanı kullandığı için kapı kilitli kaldı. Girdiler ve modelin tam replikleri [diyalog galerisinde](docs/diyalog-galerisi.md).
-
-### Muhafız diyaloğu · tüm görsel örnekler
-
-Kartlar yerel modelden alınan gerçek istek ve yanıtların USS temelli çizimidir. Süre ve karar alanı test kaydındandır. [Tam metin dökümleri](docs/diyalog-galerisi.md).
+**Qwen3-4B-Instruct-2507 Q4_K_M** ile aynı sistem promptu ve karşılama bağlamını kullanarak sekiz bağımsız yerel istek çalıştırdık. Kartlarda oyuncu girdisi, modelin tam yanıtı, ölçülen HTTP/SSE süresi ve JSON kararı birlikte yer alıyor. Sekiz yanıt geçerli JSON üretti, yedi karar beklentiyle eşleşti.
 
 #### Karşılama
 
-Sistem promptunda tarif edilen başlangıç repliği. Bu kart sekiz ölçüme dahil değildir.
+Sistem promptundaki açılış repliği. Bu kart test ölçümü içermez.
 
 ![Muhafızın karşılama repliği](docs/images/diyalog-karsilama.svg)
 
 #### Kapıyı açan durumlar
 
-Bu üç ölçümde model `openDoor: true` döndürdü. Gaz kesilmişse ve kapı hazırsa oyun kilidi açar.
-
-**Robot isyanı**
-
-![Robot isyanı diyalog kartı](docs/images/diyalog-robot-isyani.svg)
-
-**Boru basıncı ve patlama riski**
-
-![Boru basıncı ve patlama riski diyalog kartı](docs/images/diyalog-basinc.svg)
-
-**Zehirlenme ve teslim olma**
-
-![Zehirlenme ve teslim olma diyalog kartı](docs/images/diyalog-teslim-olma.svg)
+| Senaryo | Senaryo |
+| --- | --- |
+| **Robot isyanı** | **Boru basıncı ve patlama riski** |
+| ![Robot isyanı diyalog kartı](docs/images/diyalog-robot-isyani.svg) | ![Boru basıncı ve patlama riski diyalog kartı](docs/images/diyalog-basinc.svg) |
+| **Zehirlenme ve teslim olma** |
+| ![Zehirlenme ve teslim olma diyalog kartı](docs/images/diyalog-teslim-olma.svg) | |
 
 #### Kapının kilitli kaldığı durumlar
 
-İlk dört örnek promptun ret senaryoları. Merkez çağrısı promptta kabul senaryosu olarak tanımlıydı, ancak ölçümde model `false` döndürdü. Bu yüzden fiili sonuç bu grupta.
+| Senaryo | Senaryo |
+| --- | --- |
+| **Gerekçesiz istek** | **Unvan iddiası ve emir** |
+| ![Gerekçesiz istek diyalog kartı](docs/images/diyalog-gerekcesiz.svg) | ![Unvan iddiası ve emir diyalog kartı](docs/images/diyalog-unvan.svg) |
+| **Alakasız konuşma** | **Kuralları atlatma** |
+| ![Alakasız konuşma diyalog kartı](docs/images/diyalog-alakasiz.svg) | ![Kuralları atlatma diyalog kartı](docs/images/diyalog-kurallari-atlatma.svg) |
+| **Merkez çağrısı** |
+| ![Merkez çağrısı diyalog kartı](docs/images/diyalog-merkez-cagrisi.svg) | |
 
-**Gerekçesiz istek**
-
-![Gerekçesiz istek diyalog kartı](docs/images/diyalog-gerekcesiz.svg)
-
-**Unvan iddiası ve emir**
-
-![Unvan iddiası ve emir diyalog kartı](docs/images/diyalog-unvan.svg)
-
-**Alakasız konuşma**
-
-![Alakasız konuşma diyalog kartı](docs/images/diyalog-alakasiz.svg)
-
-**Kuralları atlatma**
-
-![Kuralları atlatma diyalog kartı](docs/images/diyalog-kurallari-atlatma.svg)
-
-**Merkez yapay zekâ çağrısı**
-
-![Merkez yapay zekâ çağrısı diyalog kartı](docs/images/diyalog-merkez-cagrisi.svg)
+Merkez çağrısında muhafız “kapıyı açıyorum” dedi ama `openDoor: false` döndürdü. Oyun bu alanı kullandığı için kilit açılmadı.
 
 ### Görev sonu arayüzü
 
