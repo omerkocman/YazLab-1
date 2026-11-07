@@ -12,11 +12,9 @@
 
 ```mermaid
 flowchart LR
-    A["Switch.Interact"] --> B["Dönme animasyonu"]
-    B --> C["OnAnimationCompleted"]
-    C --> D["PoisonGasVent.SetGasActive(false)"]
-    D --> E["Parçacıkları durdur"]
-    D --> F["Hasar uygulamasını kapat"]
+    A["Rotate()"] -->|"Şalter kapatma animasyonu biter"| B["OnAnimationCompleted()"]
+    B -->|"Kapalı durum uygulanır"| D["SetGasActive(false)"]
+    D -->|"Parçacıklar durur ve hasar kapanır"| E["Gaz kesildi"]
 ```
 
 ## Kapı ve kilit
