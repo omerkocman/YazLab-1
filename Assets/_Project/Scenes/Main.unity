@@ -3788,11 +3788,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4627029968123933145, guid: 869ce26a4282958419d566b3fe90d5f7, type: 3}
       propertyPath: visitedRadius
-      value: 2
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 4627029968123933145, guid: 869ce26a4282958419d566b3fe90d5f7, type: 3}
       propertyPath: explorationStep
-      value: 3
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4627029968123933145, guid: 869ce26a4282958419d566b3fe90d5f7, type: 3}
       propertyPath: obstacleClearance
