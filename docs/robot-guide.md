@@ -1,6 +1,6 @@
 # Bakım robotu modülü
 
-[README](../README.md) · [Robot kaynak klasörü](../Assets/_Project/Scripts/Robot/) · [Robot prefabı](../Assets/_Project/Prefabs/PF_Robot.prefab) · [Muhafız](muhafiz.md) · [Dünya ve oyun akışı](oyun-akisi.md)
+[README](../README.md) · [Robot kaynak klasörü](../Assets/_Project/Scripts/Robot/) · [Robot prefabı](../Assets/_Project/Prefabs/PF_Robot.prefab) · [Muhafız](guard-guide.md) · [Dünya ve oyun akışı](gameplay-flow.md)
 
 Oyuncu robota gazı kesme görevi verir. Robot sensörlerinden bilgi toplar, keşif hedefi seçer ve NavMesh üzerinden hareket eder. Görev şalterin kapandığı doğrulandığında tamamlanır.
 
@@ -148,7 +148,7 @@ flowchart TD
 
 Kapı açıldıysa yeniden arar. Kapı kapalıysa mesafeyi ve etkileşim iznini kontrol edip açma isteği gönderir. Animasyon sürerken bekler. Açma denemesi sonuç vermezse keşfe döner.
 
-[Kaynak kodu](../Assets/_Project/Scripts/Robot/RobotBrain.cs#L388) · [Kapı ve kilit](oyun-akisi.md#kapı-ve-kilit) · [Karar şemasına dön](#update-karar-şeması)
+[Kaynak kodu](../Assets/_Project/Scripts/Robot/RobotBrain.cs#L388) · [Kapı ve kilit](gameplay-flow.md#kapı-ve-kilit) · [Karar şemasına dön](#update-karar-şeması)
 
 ### Alt çağrılar
 

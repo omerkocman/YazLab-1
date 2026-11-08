@@ -1,6 +1,6 @@
 # NPC muhafız
 
-[README](../README.md) · [NPC kaynak klasörü](../Assets/_Project/Scripts/NPCGuard/) · [NPC prefabı](../Assets/_Project/Prefabs/PF_NPCGuard.prefab) · [Tam prompt](../Assets/_Project/Prompts/NPCGuardPrompt.txt) · [Sekiz diyalog](diyalog-galerisi.md)
+[README](../README.md) · [NPC kaynak klasörü](../Assets/_Project/Scripts/NPCGuard/) · [NPC prefabı](../Assets/_Project/Prefabs/PF_NPCGuard.prefab) · [Tam prompt](../Assets/_Project/Prompts/NPCGuardPrompt.txt) · [Sekiz diyalog](dialogue-gallery.md)
 
 ```mermaid
 flowchart TD
@@ -55,4 +55,4 @@ flowchart TD
 
 ![Merkez çağrısında model repliği ve karar alanı uyuşmuyor](images/diyalog-merkez-cagrisi.svg)
 
-Merkez çağrısında model metinde izin verdi, karar alanında `false` üretti. Yapılandırılmış karar alanı kapıyı kilitli tuttu. Diğer örnekler ve tam metinler [diyalog galerisinde](diyalog-galerisi.md).
+Merkez çağrısında model metinde izin verdi, karar alanında `false` üretti. Yapılandırılmış karar alanı kapıyı kilitli tuttu. Diğer örnekler ve tam metinler [diyalog galerisinde](dialogue-gallery.md).

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 449" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="449" viewBox="0 0 920 449" role="img" aria-labelledby="title desc">
 <title id="title">Basınç tehlikesi</title><desc id="desc">Oyuncu: Dışarıdaki gaz vanasını kapattım, ama basınç borulardan sunucu odasına geri tepiyor. Tahliye valfini açmazsak sunucular patlayacak. Muhafız: Sensörlerimdeki basınç anomalisi bu yüzdendi demek! Ana sunucular patlamamalı, çabuk içeri girip valfi aç! openDoor: true.</desc>
 <g font-family="Segoe UI, Arial, sans-serif">
 <rect x="1" y="1" width="918" height="447" rx="12" fill="#101923" stroke="#40535f"/>

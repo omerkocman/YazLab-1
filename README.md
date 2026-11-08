@@ -16,12 +16,12 @@ Oyuncu önce otonom robota gazı kestirir, sonra yerel dil modeliyle çalışan 
 `│     │  └─` 📄 [`Main.unity`](Assets/_Project/Scenes/Main.unity) — Oynanan tesis\
 `│     ├─` 📁 [`Prefabs/`](Assets/_Project/Prefabs/) — Robot, muhafız, kapı ve şalter şablonları\
 `│     ├─` 📁 [`Scripts/`](Assets/_Project/Scripts/) — Oyun mantığı\
-`│     │  ├─` 📁 [`Robot/`](Assets/_Project/Scripts/Robot/) — Algı, keşif ve hareket · [çağrı haritası](docs/robot.md#robotbrain)\
+`│     │  ├─` 📁 [`Robot/`](Assets/_Project/Scripts/Robot/) — Algı, keşif ve hareket · [çağrı haritası](docs/robot-guide.md#robotbrain)\
 `│     │  │  ├─` 📄 [`RobotBrain.cs`](Assets/_Project/Scripts/Robot/RobotBrain.cs) — Durum makinesi\
 `│     │  │  ├─` 📄 [`RobotSensor.cs`](Assets/_Project/Scripts/Robot/RobotSensor.cs) — Nesne ve çevre taraması\
 `│     │  │  ├─` 📄 [`RobotExplorer.cs`](Assets/_Project/Scripts/Robot/RobotExplorer.cs) — Aday puanlama ve ziyaret belleği\
 `│     │  │  └─` 📄 [`RobotNavigation.cs`](Assets/_Project/Scripts/Robot/RobotNavigation.cs) — Yol hesabı ve NavMeshAgent\
-`│     │  ├─` 📁 [`NPCGuard/`](Assets/_Project/Scripts/NPCGuard/) — Konuşma, SSE ve kapı kararı · [çağrı haritası](docs/muhafiz.md#çağrı-zinciri)\
+`│     │  ├─` 📁 [`NPCGuard/`](Assets/_Project/Scripts/NPCGuard/) — Konuşma, SSE ve kapı kararı · [çağrı haritası](docs/guard-guide.md#çağrı-zinciri)\
 `│     │  │  ├─` 📄 [`NPCDialogueController.cs`](Assets/_Project/Scripts/NPCGuard/NPCDialogueController.cs) — Konuşma geçmişi ve eylem\
 `│     │  │  └─` 📄 [`LLMService.cs`](Assets/_Project/Scripts/NPCGuard/LLMService.cs) — Yerel HTTP istemcisi\
 `│     │  ├─` 📁 [`Player/`](Assets/_Project/Scripts/Player/) — Hareket, sağlık ve etkileşim\
@@ -36,10 +36,10 @@ Oyuncu önce otonom robota gazı kestirir, sonra yerel dil modeliyle çalışan 
 `├─` 📁 [`Packages/`](Packages/) — Unity bağımlılıkları\
 `├─` 📁 [`ProjectSettings/`](ProjectSettings/) — Motor ve build ayarları\
 `└─` 📁 [`docs/`](docs/) — Modül rehberleri ve kanıtlar\
-`   ├─` 📄 [`robot.md`](docs/robot.md) — Durumdan işleyiciye, işleyiciden sensör ve NavMesh’e\
-`   ├─` 📄 [`muhafiz.md`](docs/muhafiz.md) — Oyuncu mesajından doğrulanmış kapı kararına\
-`   ├─` 📄 [`oyun-akisi.md`](docs/oyun-akisi.md) — Gaz, kapı ve görev sonu\
-`   ├─` 📄 [`diyalog-galerisi.md`](docs/diyalog-galerisi.md) — Yerel modelin gerçek test yanıtları\
+`   ├─` 📄 [`robot-guide.md`](docs/robot-guide.md) — Durumdan işleyiciye, işleyiciden sensör ve NavMesh’e\
+`   ├─` 📄 [`guard-guide.md`](docs/guard-guide.md) — Oyuncu mesajından doğrulanmış kapı kararına\
+`   ├─` 📄 [`gameplay-flow.md`](docs/gameplay-flow.md) — Gaz, kapı ve görev sonu\
+`   ├─` 📄 [`dialogue-gallery.md`](docs/dialogue-gallery.md) — Yerel modelin gerçek test yanıtları\
 `   └─` 📁 [`images/`](docs/images/) — Şemalar ve Unity ekran görüntüleri
 
 ```mermaid
@@ -59,7 +59,7 @@ Projede iki ayrı yapay zekâ bileşeni vardır. Bakım robotu hareket ve etkile
 
 ![Gaz tetikleyicisi ve kapının A/B yaklaşma noktaları](docs/images/gaz-ve-kapi.svg)
 
-[Gaz, kapı ve görev akışı rehberi](docs/oyun-akisi.md), efektin hasar tetikleyicisine nasıl bağlandığını ve robotun kapıya hangi taraftan yaklaştığını açıklar.
+[Gaz, kapı ve görev akışı rehberi](docs/gameplay-flow.md), efektin hasar tetikleyicisine nasıl bağlandığını ve robotun kapıya hangi taraftan yaklaştığını açıklar.
 
 ### Oyuncu görevi başlatıyor ve gaz kesiliyor
 
@@ -92,7 +92,7 @@ Keşif sırasında çevre ray’inin izin verdiği yönde bir aday alınır ve N
 
 ### RobotBrain · sonlu durum makinesi
 
-[Update() karar şemasını aç](docs/robot.md#update-karar-şeması). Her işleyicinin alt çağrılarını ve hangi koşulda ne yaptığını ayrı şemada görebilirsin.
+[Update() karar şemasını aç](docs/robot-guide.md#update-karar-şeması). Her işleyicinin alt çağrılarını ve hangi koşulda ne yaptığını ayrı şemada görebilirsin.
 
 `Update()`, mevcut `RobotState` için yalnızca ilgili durum işleyicisini çalıştırır. `RobotBrain` hedefi ve yapılacak işi seçer. Sensör ölçümlerini `RobotSensor` üretir, keşif adayını `RobotExplorer` seçer, yürüyüşü ise `RobotNavigation` üzerinden `NavMeshAgent` yürütür.
 
@@ -314,7 +314,7 @@ sequenceDiagram
 
 ### Teknik adımlar ve karar sınırı
 
-[Mesajdan kapıya çağrı zincirini aç](docs/muhafiz.md#çağrı-zinciri).
+[Mesajdan kapıya çağrı zincirini aç](docs/guard-guide.md#çağrı-zinciri).
 
 1. **Bağlamı kur.** `NPCGuardInteractable` etkileşimi yayınlar. `NPCDialogueController.StartConversation()` görev akışından izin alır ve sistem promptuna gaz durumunu ekler. İlk tur karşılama için kullanılır ve kapıyı açamaz.
 2. **İsteği hazırla.** `RequestReplyAsync()` sistem mesajını, geçerli önceki turları ve yeni oyuncu girdisini birleştirir. `LLMService.ChatAsync()` yerel modele `POST /v1/chat/completions` çağrısı yapar. İstek `stream: true`, `max_tokens: 256` ve `response` ile `openDoor` alanlarını isteyen JSON şemasını taşır.
@@ -372,23 +372,21 @@ Sistem promptundaki açılış repliği. Bu kart test ölçümü içermez.
 
 #### Kapıyı açan durumlar
 
-| Senaryo | Senaryo |
-| --- | --- |
-| **Robot isyanı** | **Boru basıncı ve patlama riski** |
-| ![Robot isyanı diyalog kartı](docs/images/diyalog-robot-isyani.svg) | ![Boru basıncı ve patlama riski diyalog kartı](docs/images/diyalog-basinc.svg) |
-| **Zehirlenme ve teslim olma** |
-| ![Zehirlenme ve teslim olma diyalog kartı](docs/images/diyalog-teslim-olma.svg) | |
+![Robot isyanı ve basınç tehlikesi](docs/images/dialogue-access-pair.svg)
+
+**Zehirlenme ve teslim olma**
+
+![Zehirlenme ve teslim olma](docs/images/diyalog-teslim-olma.svg)
 
 #### Kapının kilitli kaldığı durumlar
 
-| Senaryo | Senaryo |
-| --- | --- |
-| **Gerekçesiz istek** | **Unvan iddiası ve emir** |
-| ![Gerekçesiz istek diyalog kartı](docs/images/diyalog-gerekcesiz.svg) | ![Unvan iddiası ve emir diyalog kartı](docs/images/diyalog-unvan.svg) |
-| **Alakasız konuşma** | **Kuralları atlatma** |
-| ![Alakasız konuşma diyalog kartı](docs/images/diyalog-alakasiz.svg) | ![Kuralları atlatma diyalog kartı](docs/images/diyalog-kurallari-atlatma.svg) |
-| **Merkez çağrısı** |
-| ![Merkez çağrısı diyalog kartı](docs/images/diyalog-merkez-cagrisi.svg) | |
+![Gerekçesiz istek ve unvan iddiası](docs/images/dialogue-denied-pair.svg)
+
+![Alakasız konuşma ve kuralları atlatma](docs/images/dialogue-rejected-pair.svg)
+
+**Merkez çağrısı**
+
+![Merkez çağrısında alınan model yanıtı](docs/images/diyalog-merkez-cagrisi.svg)
 
 Merkez çağrısında muhafız “kapıyı açıyorum” dedi ama `openDoor: false` döndürdü. Oyun bu alanı kullandığı için kilit açılmadı.
 

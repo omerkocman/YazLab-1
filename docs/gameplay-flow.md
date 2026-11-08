@@ -1,6 +1,6 @@
 # Dünya nesneleri ve oyun akışı
 
-[README](../README.md) · [Main sahnesi](../Assets/_Project/Scenes/Main.unity) · [Prefab klasörü](../Assets/_Project/Prefabs/) · [Robot](robot.md) · [Muhafız](muhafiz.md)
+[README](../README.md) · [Main sahnesi](../Assets/_Project/Scenes/Main.unity) · [Prefab klasörü](../Assets/_Project/Prefabs/) · [Robot](robot-guide.md) · [Muhafız](guard-guide.md)
 
 ![Gaz tetikleyicisi ve kapının iki tarafındaki yaklaşma noktaları](images/gaz-ve-kapi.svg)
 
